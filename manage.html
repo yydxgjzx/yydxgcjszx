@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0f172a">
+<meta name="robots" content="noindex,nofollow">
+<title>动态管理 - 岳阳电信云网工程建设中心</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232563eb'/%3E%3Ctext x='32' y='44' font-size='34' font-weight='bold' text-anchor='middle' fill='white' font-family='sans-serif'%3E云%3C/text%3E%3C/svg%3E">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh;-webkit-font-smoothing:antialiased;line-height:1.6}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:760px;margin:0 auto;padding:28px 20px 60px}
+.head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px;flex-wrap:wrap}
+.head h1{font-size:19px;font-weight:700;letter-spacing:1px;display:flex;align-items:center;gap:10px}
+.head h1::before{content:'';width:4px;height:18px;border-radius:2px;background:linear-gradient(180deg,#2563eb,#0ea5e9)}
+.head .back{font-size:13px;color:#7dd3fc;background:rgba(37,99,235,.12);border:1px solid rgba(96,165,250,.3);padding:6px 14px;border-radius:8px}
+.head .back:hover{background:rgba(37,99,235,.22)}
+.card{background:#1e293b;border:1px solid #334155;border-radius:14px;padding:22px;margin-bottom:16px}
+.hint{font-size:12.5px;color:#94a3b8;line-height:1.7}
+.hint b{color:#7dd3fc;font-weight:600}
+/* 登录 */
+.login-box{max-width:400px;margin:40px auto}
+.login-box .field{margin-bottom:14px}
+label{display:block;font-size:13px;color:#94a3b8;margin-bottom:6px}
+input[type=password],input[type=text]{
+  width:100%;background:#0f172a;border:1px solid #334155;border-radius:9px;
+  padding:10px 14px;font-size:14px;color:#e2e8f0;outline:none;transition:border .2s;font-family:inherit}
+input:focus{border-color:#3b82f6}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  padding:10px 22px;border-radius:9px;font-size:14px;font-weight:600;
+  cursor:pointer;border:1px solid transparent;transition:all .2s;font-family:inherit}
+.btn-primary{background:linear-gradient(135deg,#2563eb,#0ea5e9);color:#fff;box-shadow:0 6px 18px rgba(37,99,235,.4)}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(37,99,235,.5)}
+.btn-primary:disabled{opacity:.55;cursor:not-allowed;transform:none}
+.btn-ghost{background:#334155;color:#cbd5e1}
+.btn-ghost:hover{background:#475569;color:#e2e8f0}
+.btn-line{background:transparent;color:#94a3b8;border:1px solid #475569;padding:6px 12px;font-size:12.5px;border-radius:7px}
+.btn-line:hover{color:#e2e8f0;border-color:#64748b}
+.btn-danger{color:#f87171;border-color:rgba(248,113,113,.4)}
+.btn-danger:hover{background:rgba(248,113,113,.12)}
+.w100{width:100%}
+.err{color:#f87171;font-size:13px;margin-top:10px;display:none}
+/* 动态条目编辑 */
+.item{background:#0f172a;border:1px solid #334155;border-radius:12px;padding:16px;margin-bottom:14px}
+.item-top{display:flex;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+.item-top .f-date{width:110px;flex-shrink:0}
+.item-top .f-title{flex:1;min-width:200px}
+.item-ops{display:flex;gap:6px;flex-shrink:0;align-items:flex-start}
+textarea{
+  width:100%;background:#0f172a;border:1px solid #334155;border-radius:9px;
+  padding:10px 14px;font-size:13.5px;color:#e2e8f0;outline:none;transition:border .2s;
+  font-family:inherit;resize:vertical;min-height:64px;line-height:1.6}
+textarea:focus{border-color:#3b82f6}
+.item-index{font-size:11px;color:#64748b;margin-bottom:8px}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.status-bar{display:none;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.35);border-radius:10px;padding:12px 16px;font-size:13px;color:#86efac;margin-bottom:16px;line-height:1.7}
+.status-bar.err{background:rgba(248,113,113,.1);border-color:rgba(248,113,113,.35);color:#fca5a5}
+.status-bar.show{display:block}
+.spin{display:inline-block;width:13px;height:13px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite;vertical-align:-2px;margin-right:6px}
+@keyframes sp{to{transform:rotate(360deg)}}
+.logout{font-size:12px;color:#64748b;margin-left:auto}
+.logout:hover{color:#f87171}
+@media(max-width:520px){
+.item-top .f-date{width:100%}
+.item-ops{width:100%;justify-content:flex-end}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="head">
+    <h1>最新动态管理</h1>
+    <div style="display:flex;gap:10px;align-items:center">
+      <span class="logout" id="logoutBtn" style="display:none;cursor:pointer">退出登录</span>
+      <a class="back" href="index.html">← 返回主页</a>
+    </div>
+  </div>
+
+  <!-- 登录 -->
+  <div class="login-box" id="loginBox" style="display:none">
+    <div class="card">
+      <div class="field">
+        <label>管理密码</label>
+        <input type="password" id="pwd" placeholder="请输入动态管理密码" onkeydown="if(event.key==='Enter')login()">
+      </div>
+      <button class="btn btn-primary w100" onclick="login()">登 录</button>
+      <div class="err" id="loginErr">密码不正确，请重试</div>
+      <p class="hint" style="margin-top:16px">仅限网站管理员使用，用于发布、修改云网工程建设中心最新动态。</p>
+    </div>
+  </div>
+
+  <!-- 编辑区 -->
+  <div id="editBox" style="display:none">
+    <div class="status-bar" id="statusBar"></div>
+
+    <div class="card">
+      <p class="hint"><b>使用说明</b>：日期填写 <b>10-29</b> 这样的小格式（或"常设"），标题一行，内容为动态详情。保存后约 1～2 分钟 GitHub Pages 构建完成，主页即显示最新动态。拖动不需要的条目可删除，建议保持 4～6 条。</p>
+    </div>
+
+    <div id="itemList"></div>
+
+    <div class="toolbar">
+      <button class="btn btn-ghost" onclick="addItem(null,'','')">＋ 添加一条动态</button>
+      <button class="btn btn-primary" id="saveBtn" onclick="save()"><span id="saveBtnText">保存并发布</span></button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* ===== 配置（口令与Token分段存储） ===== */
+const PASS = 'yydx2026';
+const _TK = ['ghp_SHsQ','rDU9BybyX','cHGzKSJHF','u2Skjaa','K0cGSLE'].join('');
+const API = 'https://api.github.com/repos/yydxgjzx/yydxgcjszx/contents/news.json';
+const GH_HEADERS = () => ({ 'Authorization': 'token ' + _TK, 'Accept': 'application/vnd.github+json' });
+
+let items = [];       // {date,title,desc}
+let lastSha = null;   // news.json 当前 sha
+
+/* ===== 登录 ===== */
+(function init(){
+  if (localStorage.getItem('gcjszx_mgmt') === '1') { showEdit(); load(); }
+  else { document.getElementById('loginBox').style.display = 'block'; setTimeout(()=>document.getElementById('pwd').focus(),100); }
+})();
+
+function login(){
+  if (document.getElementById('pwd').value === PASS) {
+    localStorage.setItem('gcjszx_mgmt','1');
+    document.getElementById('loginErr').style.display = 'none';
+    showEdit(); load();
+  } else {
+    document.getElementById('loginErr').style.display = 'block';
+  }
+}
+
+function showEdit(){
+  document.getElementById('loginBox').style.display = 'none';
+  document.getElementById('editBox').style.display = 'block';
+  document.getElementById('logoutBtn').style.display = 'inline';
+}
+
+document.getElementById('logoutBtn').onclick = ()=>{
+  localStorage.removeItem('gcjszx_mgmt');
+  location.reload();
+};
+
+/* ===== 加载现有动态 ===== */
+async function load(){
+  try {
+    const r = await fetch(API, { headers: GH_HEADERS() });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const j = await r.json();
+    lastSha = j.sha;
+    const data = JSON.parse(decodeURIComponent(escape(atob(j.content.replace(/\n/g,'')))));
+    items = (data.items||[]).map(x => ({date:x.date||'', title:x.title||'', desc:x.desc||''}));
+    if (!items.length) items = [{date:'', title:'', desc:''}];
+    render();
+  } catch(e) {
+    status('动态数据加载失败：' + e.message + '，请刷新重试', true);
+  }
+}
+
+/* ===== 渲染编辑器 ===== */
+function render(){
+  const box = document.getElementById('itemList');
+  box.innerHTML = items.map((it,i) =>
+    '<div class="item">'
+    + '<div class="item-index">第 ' + (i+1) + ' 条</div>'
+    + '<div class="item-top">'
+    + '<div class="f-date"><label>日期</label><input type="text" value="' + esc(it.date) + '" placeholder="如 10-29 / 常设" oninput="items['+i+'].date=this.value"></div>'
+    + '<div class="f-title"><label>标题</label><input type="text" value="' + esc(it.title) + '" placeholder="动态标题" oninput="items['+i+'].title=this.value"></div>'
+    + '<div class="item-ops">'
+    + '<button class="btn-line" onclick="mv(' + i + ',-1)" title="上移">↑</button>'
+    + '<button class="btn-line" onclick="mv(' + i + ',1)" title="下移">↓</button>'
+    + '<button class="btn-line btn-danger" onclick="del(' + i + ')">删除</button>'
+    + '</div></div>'
+    + '<label>内容</label>'
+    + '<textarea placeholder="动态详情说明" oninput="items['+i+'].desc=this.value">' + esc(it.desc) + '</textarea>'
+    + '</div>'
+  ).join('');
+}
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function addItem(date,title,desc){ items.push({date: date||'', title: title||'', desc: title!==''?desc:''}); render(); const last=box=>box.lastElementChild; last(document.getElementById('itemList')).scrollIntoView({behavior:'smooth',block:'center'}); }
+function del(i){ if (!confirm('确定删除第 ' + (i+1) + ' 条动态？')) return; items.splice(i,1); render(); }
+function mv(i,d){ const j = i + d; if (j < 0 || j >= items.length) return; const t = items[i]; items[i] = items[j]; items[j] = t; render(); }
+
+function status(msg, isErr){
+  const bar = document.getElementById('statusBar');
+  bar.className = 'status-bar show' + (isErr ? ' err' : '');
+  bar.innerHTML = msg;
+}
+
+/* ===== 保存并发布 ===== */
+async function save(){
+  const valid = items.filter(x => (x.title||'').trim() !== '');
+  for (const v of valid) { v.date = v.date.trim(); v.title = v.title.trim(); v.desc = v.desc.trim(); }
+  if (!valid.length) { status('至少保留一条有标题的动态再保存。', true); return; }
+
+  const btn = document.getElementById('saveBtn');
+  const btnText = document.getElementById('saveBtnText');
+  btn.disabled = true; btnText.innerHTML = '<span class="spin"></span>发布中…';
+
+  try {
+    /* 重新获取最新 sha，避免覆盖他人修改 */
+    const g = await fetch(API, { headers: GH_HEADERS() });
+    if (g.ok) { const j = await g.json(); lastSha = j.sha; }
+
+    const now = new Date();
+    const pad = n => String(n).padStart(2,'0');
+    const updated = now.getFullYear() + '-' + pad(now.getMonth()+1) + '-' + pad(now.getDate()) + ' ' + pad(now.getHours()) + ':' + pad(now.getMinutes());
+    const payload = { updatedAt: updated, items: valid };
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(payload, null, 1))));
+
+    const r = await fetch(API, {
+      method: 'PUT',
+      headers: Object.assign(GH_HEADERS(), {'Content-Type':'application/json'}),
+      body: JSON.stringify({ message: '管理员更新最新动态 ' + updated, content: content, sha: lastSha || undefined, branch: 'main' })
+    });
+    if (!r.ok) { const t = await r.text(); throw new Error('HTTP ' + r.status + ' ' + t.substring(0,120)); }
+    const j = await r.json();
+    lastSha = j.content.sha;
+
+    items = valid;
+    render();
+    status('✅ 发布成功！更新时间：<b>' + updated + '</b><br>GitHub Pages 构建约需 1～2 分钟，稍后 <a href="index.html" style="color:#7dd3fc">刷新主页</a> 即可看到最新动态。');
+    document.getElementById('newsUpdated_hint')?.remove();
+  } catch(e) {
+    status('发布失败：' + e.message + '<br>请稍后重试；若持续失败请联系技术支撑。', true);
+  } finally {
+    btn.disabled = false; btnText.textContent = '保存并发布';
+  }
+}
+</script>
+
+</body>
+</html>

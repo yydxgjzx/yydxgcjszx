@@ -10,5 +10,7 @@
     {"name": "刘益锴", "total": 166, "accept": 115, "close": 101, "rate": 0.693, "closeRate": 0.608},
     {"name": "李力", "total": 91, "accept": 60, "close": 56, "rate": 0.659, "closeRate": 0.615},
     {"name": "陈凌", "total": 100, "accept": 60, "close": 60, "rate": 0.600, "closeRate": 0.600}
-  ]
+  ],
+  "gz": { "totalAmount": 9634.9, "totalRate": 0.7087, "monthAmount": 416 },
+  "zg": { "zhuanguAmount": 16259.6, "zhuanguDone": 11702.7, "zhuanguRate": 0.6238, "monthAmount": 1595.1 }
 }

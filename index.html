@@ -50,15 +50,21 @@ a{text-decoration:none;color:inherit}
 .r-name{font-size:15px;font-weight:700;color:#f1f5f9;display:flex;align-items:center;gap:8px}
 .r-name::before{content:'';width:3px;height:13px;border-radius:2px;background:linear-gradient(180deg,#60a5fa,#22d3ee)}
 .r-meta{font-size:11.5px;color:#94a3b8;margin-top:3px}
-.r-bar{height:8px;border-radius:4px;background:#334155;margin-top:12px;overflow:hidden}
+.r-bars{margin-top:12px;display:flex;flex-direction:column;gap:9px}
+.r-row{display:flex;flex-direction:column;gap:5px}
+.r-label{display:flex;justify-content:space-between;align-items:baseline;font-size:10.5px;color:#94a3b8}
+.r-label em{font-style:normal;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.r-label.accept em{color:#7dd3fc}
+.r-label.close em{color:#86efac}
+.r-bar{height:8px;border-radius:4px;background:#334155;overflow:hidden}
 .r-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,#2563eb,#0ea5e9);transition:width .8s ease}
-.r-pct{display:flex;justify-content:space-between;align-items:baseline;margin-top:7px}
-.r-pct b{font-size:19px;font-weight:800;color:#7dd3fc;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
-.r-pct span{font-size:10.5px;color:#64748b}
+.r-fill.close-fill{background:linear-gradient(90deg,#059669,#34d399)}
 .r-card.center-card{background:linear-gradient(135deg,#1e3a8a,#155e75);border-color:rgba(96,165,250,.4)}
 .r-card.center-card .r-name{color:#e0f2fe}
-.r-card.center-card .r-pct b{color:#bae6fd}
+.r-card.center-card .r-label.accept em{color:#bae6fd}
+.r-card.center-card .r-label.close em{color:#bbf7d0}
 .r-card.center-card .r-fill{background:linear-gradient(90deg,#38bdf8,#22d3ee)}
+.r-card.center-card .r-fill.close-fill{background:linear-gradient(90deg,#10b981,#34d399)}
 .note{font-size:11.5px;color:#64748b;text-align:center;margin-bottom:36px;line-height:1.7}
 /* ===== 最新动态 ===== */
 .news-card{background:#1e293b;border:1px solid #334155;border-radius:14px;padding:18px 22px;margin-bottom:36px}
@@ -159,28 +165,34 @@ fetch('progress.json?t=' + Date.now())
   .then(r => r.json())
   .then(d => {
     document.getElementById('resultDesc').textContent = '各工程管理员工程建设与验收情况（截至 ' + d.asOf + '）';
-    const yi = d.zhuanguYi || (d.kpi.zhuangu >= 10000 ? (d.kpi.zhuangu/10000).toFixed(2) + ' 亿元' : Math.round(d.kpi.zhuangu) + ' 万元');
+    const yi = d.kpi.zhuangu >= 10000 ? (d.kpi.zhuangu/10000).toFixed(2) + ' 亿元' : Math.round(d.kpi.zhuangu) + ' 万元';
     document.getElementById('kpiStrip').innerHTML = [
       '<span class="kpi-chip">在管工程 <b>' + d.kpi.total + '</b> 个</span>',
       '<span class="kpi-chip">累计完成验收 <b>' + d.kpi.accept + '</b> 项</span>',
+      '<span class="kpi-chip">累计完成关闭 <b>' + d.kpi.close + '</b> 项</span>',
       '<span class="kpi-chip">累计转固 <b>' + yi + '</b></span>',
       '<span class="kpi-chip">数据截至 <b>' + d.asOf + '</b></span>'
     ].join('');
+    const bar = a => 
+      '<div class="r-bars">'
+      + '<div class="r-row"><div class="r-label accept"><span>验收完成率</span><em>' + (a.rate*100).toFixed(1) + '%</em></div>'
+      + '<div class="r-bar"><div class="r-fill" style="width:' + (a.rate*100).toFixed(1) + '%"></div></div></div>'
+      + '<div class="r-row"><div class="r-label close"><span>关闭完成率</span><em>' + (a.closeRate*100).toFixed(1) + '%</em></div>'
+      + '<div class="r-bar"><div class="r-fill close-fill" style="width:' + (a.closeRate*100).toFixed(1) + '%"></div></div></div>'
+      + '</div>';
     const cards = d.admins.map(a =>
       '<div class="r-card">'
       + '<div class="r-name">' + a.name + '</div>'
-      + '<div class="r-meta">在管 ' + a.total + ' 个工程 · 已验收 ' + a.accept + ' 项</div>'
-      + '<div class="r-bar"><div class="r-fill" style="width:' + (a.rate*100).toFixed(1) + '%"></div></div>'
-      + '<div class="r-pct"><b>' + (a.rate*100).toFixed(1) + '%</b><span>验收完成率</span></div>'
+      + '<div class="r-meta">在管 ' + a.total + ' 个工程 · 已验收 ' + a.accept + ' 项 · 已关闭 ' + a.close + ' 项</div>'
+      + bar(a)
       + '</div>'
     ).join('');
     const c = d.center;
     const centerCard =
       '<div class="r-card center-card">'
       + '<div class="r-name">中心整体</div>'
-      + '<div class="r-meta">在管 ' + c.total + ' 个工程 · 已验收 ' + c.accept + ' 项</div>'
-      + '<div class="r-bar"><div class="r-fill" style="width:' + (c.rate*100).toFixed(1) + '%"></div></div>'
-      + '<div class="r-pct"><b>' + (c.rate*100).toFixed(1) + '%</b><span>验收完成率</span></div>'
+      + '<div class="r-meta">在管 ' + c.total + ' 个工程 · 已验收 ' + c.accept + ' 项 · 已关闭 ' + c.close + ' 项</div>'
+      + bar(c)
       + '</div>';
     document.getElementById('resultGrid').innerHTML = centerCard + cards;
     document.getElementById('pnote').innerHTML = '以上为工程建设成果速览，详细进度数据请访问工程验收进度看板查看';

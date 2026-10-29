@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0f172a">
+<meta name="description" content="岳阳电信云网工程建设中心：工程验收进度看板、施工阻力协调系统、AI赋能工程管理">
+<title>岳阳电信云网工程建设中心</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh;-webkit-font-smoothing:antialiased;line-height:1.6}
+a{text-decoration:none;color:inherit}
+.hero{background:linear-gradient(135deg,#1e3a8a 0%,#0e7490 60%,#0f172a 100%);padding:64px 24px 48px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-120px;right:-120px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(96,165,250,.18),transparent 70%)}
+.hero::after{content:'';position:absolute;bottom:-160px;left:-100px;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(34,211,238,.12),transparent 70%)}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:6px 18px;font-size:13px;color:#bae6fd;letter-spacing:2px;margin-bottom:20px;backdrop-filter:blur(4px)}
+.hero h1{font-size:36px;font-weight:800;letter-spacing:4px;color:#f8fafc;position:relative;z-index:1}
+.hero .subtitle{font-size:15px;color:#cbd5e1;margin-top:14px;max-width:640px;margin-left:auto;margin-right:auto;position:relative;z-index:1}
+.hero-links{display:flex;gap:14px;justify-content:center;margin-top:30px;flex-wrap:wrap;position:relative;z-index:1}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;border-radius:10px;font-size:15px;font-weight:600;transition:all .2s;border:1px solid transparent}
+.btn-primary{background:linear-gradient(135deg,#2563eb,#0ea5e9);color:#fff;box-shadow:0 8px 24px rgba(37,99,235,.4)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(37,99,235,.5)}
+.btn-ghost{background:rgba(255,255,255,.08);color:#e2e8f0;border-color:rgba(255,255,255,.25)}
+.btn-ghost:hover{background:rgba(255,255,255,.15);transform:translateY(-2px)}
+.btn .icon{font-size:16px}
+.container{max-width:1080px;margin:0 auto;padding:0 20px}
+.section{padding:56px 0 8px}
+.section-title{font-size:22px;font-weight:700;color:#f1f5f9;text-align:center;letter-spacing:1px;margin-bottom:10px}
+.section-title span{background:linear-gradient(135deg,#60a5fa,#22d3ee);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.section-desc{text-align:center;color:#94a3b8;font-size:14px;margin-bottom:32px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding-bottom:40px}
+.card{background:#1e293b;border:1px solid #334155;border-radius:14px;padding:24px;transition:all .25s;position:relative;overflow:hidden}
+.card:hover{transform:translateY(-4px);border-color:#475569;box-shadow:0 12px 32px rgba(0,0,0,.35)}
+.card::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,#2563eb,#0ea5e9);opacity:.85}
+.card-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px;background:rgba(37,99,235,.15)}
+.card h3{font-size:17px;font-weight:700;color:#f1f5f9;margin-bottom:8px}
+.card p{font-size:13px;color:#94a3b8}
+.card .tag{display:inline-block;margin-top:12px;font-size:12px;color:#7dd3fc;background:rgba(37,99,235,.12);border:1px solid rgba(96,165,250,.3);padding:3px 10px;border-radius:999px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding-bottom:48px}
+.stat{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:20px;text-align:center}
+.stat .num{font-size:30px;font-weight:800;background:linear-gradient(135deg,#60a5fa,#22d3ee);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-family:'DIN Alternate','Roboto',sans-serif;letter-spacing:-.02em}
+.stat .label{font-size:12px;color:#94a3b8;margin-top:6px}
+.entry{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding-bottom:48px}
+.entry-card{background:linear-gradient(135deg,#1e293b,#0f172a);border:1px solid #334155;border-radius:14px;padding:26px;display:flex;flex-direction:column;transition:all .25s}
+.entry-card:hover{border-color:#60a5fa;transform:translateY(-3px);box-shadow:0 10px 28px rgba(37,99,235,.2)}
+.entry-card h3{font-size:17px;font-weight:700;color:#f1f5f9;margin-bottom:8px}
+.entry-card p{font-size:13px;color:#94a3b8;margin-bottom:16px;flex:1}
+.entry-link{display:inline-flex;align-items:center;gap:6px;color:#7dd3fc;font-size:14px;font-weight:600}
+.entry-link:hover{color:#38bdf8}
+.footer{text-align:center;color:#64748b;font-size:12px;padding:32px 20px;border-top:1px solid #1e293b;margin-top:32px}
+.footer b{color:#94a3b8;font-weight:600}
+@media(max-width:768px){
+.hero{padding:48px 16px 36px}
+.hero h1{font-size:26px;letter-spacing:1px}
+.cards{grid-template-columns:1fr}
+.stats{grid-template-columns:repeat(2,1fr)}
+.entry{grid-template-columns:1fr}
+.btn{width:100%;justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-badge">中国电信 · 岳阳分公司</div>
+  <h1>云网工程建设中心</h1>
+  <p class="subtitle">以数据驱动工程管理，以 AI 赋能提质增效。聚焦工程验收、施工协调与进度管控，构建工程建设管理全流程闭环。</p>
+  <div class="hero-links">
+    <a class="btn btn-primary" href="https://yydxgjzx.github.io/" target="_blank"><span class="icon">📊</span> 工程验收进度看板</a>
+    <a class="btn btn-ghost" href="https://yydxgjzx.github.io/up/" target="_blank"><span class="icon">🔧</span> 施工阻力协调系统</a>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="section">
+    <h2 class="section-title">核心<span>业务</span></h2>
+    <p class="section-desc">覆盖工程建设管理全流程的数字化能力</p>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">📊</div>
+        <h3>工程验收进度看板</h3>
+        <p>实时呈现结转、新建、挂账、转固四类工程的验收率、关闭率、超期与转固进度，支持工程管理员、施工单位、区域三维度统计排名。</p>
+        <span class="tag">KPI · 图表 · 明细联动</span>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔧</div>
+        <h3>施工阻力协调系统</h3>
+        <p>施工阻力在线填报、受理、反馈、确认全流程闭环管理，超时预警、状态统计、一键导出，解决阻工沟通不畅、跟踪不力问题。</p>
+        <span class="tag">全流程留痕 · 超时倒计时</span>
+      </div>
+      <div class="card">
+        <div class="card-icon">🤖</div>
+        <h3>AI 赋能工程管理</h3>
+        <p>AI 自动完成数据提取、看板生成与每日定时更新；结算资料智能审核，自动校验定额匹配、费用计算与跨表一致性并生成审计报告。</p>
+        <span class="tag">本地处理 · 自动审核</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">数据<span>概览</span></h2>
+    <p class="section-desc">看板系统覆盖范围与运行状态</p>
+    <div class="stats">
+      <div class="stat"><div class="num">4</div><div class="label">工程类别（结转/新建/挂账/转固）</div></div>
+      <div class="stat"><div class="num">3</div><div class="label">统计维度（管理员/施工单位/区域）</div></div>
+      <div class="stat"><div class="num">600+</div><div class="label">在管工程数量</div></div>
+      <div class="stat"><div class="num">9:00</div><div class="label">每日自动更新</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">系统<span>入口</span></h2>
+    <p class="section-desc">网页端 · 微信小程序 · 数据同步</p>
+    <div class="entry">
+      <div class="entry-card">
+        <h3>工程验收进度看板系统</h3>
+        <p>四类工程进度总览、多维统计排名、超期工程清单、月度目标完成情况，手机电脑均可访问。</p>
+        <a class="entry-link" href="https://yydxgjzx.github.io/" target="_blank">访问看板 →</a>
+      </div>
+      <div class="entry-card">
+        <h3>施工阻力协调系统</h3>
+        <p>阻工问题在线填报与受理、全流程跟踪、借料管理，与看板同一账号体系，一次登录双系统可用。</p>
+        <a class="entry-link" href="https://yydxgjzx.github.io/up/" target="_blank">访问系统 →</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <b>岳阳电信云网工程建设中心</b> · 数据全程本地处理 · 网页端与微信小程序多端同步<br>
+  <span style="opacity:.7">© 2026 中国电信股份有限公司岳阳分公司 云网工程建设中心</span>
+</div>
+
+</body>
+</html>

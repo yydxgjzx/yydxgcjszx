@@ -4,79 +4,60 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0f172a">
-<meta name="description" content="岳阳电信云网工程建设中心：工程验收进度看板、施工阻力协调系统、AI赋能工程管理">
+<meta name="description" content="岳阳电信云网工程建设中心：工程进度速览与最新动态">
 <title>岳阳电信云网工程建设中心</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232563eb'/%3E%3Ctext x='32' y='44' font-size='34' font-weight='bold' text-anchor='middle' fill='white' font-family='sans-serif'%3E云%3C/text%3E%3C/svg%3E">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh;-webkit-font-smoothing:antialiased;line-height:1.6}
 a{text-decoration:none;color:inherit}
-/* ========== 顶部导航（新表头） ========== */
-.navbar{position:sticky;top:0;z-index:100;background:rgba(15,23,42,.92);backdrop-filter:blur(10px);border-bottom:1px solid #1e293b;box-shadow:0 2px 16px rgba(0,0,0,.35)}
-.nav-inner{max-width:1080px;margin:0 auto;padding:0 20px;height:60px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-.brand{display:flex;align-items:center;gap:11px;flex-shrink:0}
-.brand-logo{width:38px;height:38px;border-radius:9px;background:linear-gradient(135deg,#2563eb,#0ea5e9);display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:800;color:#fff;box-shadow:0 4px 14px rgba(37,99,235,.45)}
+/* ===== 顶部导航 ===== */
+.navbar{position:sticky;top:0;z-index:100;background:rgba(15,23,42,.93);backdrop-filter:blur(10px);border-bottom:1px solid #1e293b;box-shadow:0 2px 16px rgba(0,0,0,.35)}
+.nav-inner{max-width:1080px;margin:0 auto;padding:0 20px;height:58px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.brand{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.brand-logo{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,#2563eb,#0ea5e9);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#fff;box-shadow:0 4px 14px rgba(37,99,235,.45)}
 .brand-text{display:flex;flex-direction:column;line-height:1.25}
-.brand-cn{font-size:11px;color:#94a3b8;letter-spacing:1px}
-.brand-name{font-size:16px;font-weight:700;color:#f1f5f9;letter-spacing:.5px}
-.nav-links{display:flex;gap:4px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-.nav-links::-webkit-scrollbar{display:none}
-.nav-links a{padding:7px 13px;border-radius:8px;font-size:13px;color:#94a3b8;white-space:nowrap;transition:all .2s;font-weight:500}
+.brand-cn{font-size:10.5px;color:#94a3b8;letter-spacing:1px}
+.brand-name{font-size:15px;font-weight:700;color:#f1f5f9;letter-spacing:.5px}
+.nav-right{display:flex;align-items:center;gap:8px}
+.nav-links{display:flex;gap:2px}
+.nav-links a{padding:6px 11px;border-radius:8px;font-size:13px;color:#94a3b8;white-space:nowrap;transition:all .2s;font-weight:500}
 .nav-links a:hover{color:#e2e8f0;background:#1e293b}
 .nav-links a.active{color:#60a5fa;background:rgba(37,99,235,.15)}
-/* ========== 首屏 ========== */
-.hero{background:linear-gradient(135deg,#1e3a8a 0%,#155e75 55%,#0f172a 100%);padding:52px 24px 44px;text-align:center;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-120px;right:-120px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(96,165,250,.18),transparent 70%)}
-.hero::after{content:'';position:absolute;bottom:-160px;left:-100px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(34,211,238,.12),transparent 70%)}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:5px 16px;font-size:12px;color:#bae6fd;letter-spacing:2px;margin-bottom:18px;backdrop-filter:blur(4px)}
-.hero h1{font-size:34px;font-weight:800;letter-spacing:4px;color:#f8fafc;position:relative;z-index:1}
-.hero .subtitle{font-size:14px;color:#cbd5e1;margin-top:12px;max-width:620px;margin-left:auto;margin-right:auto;position:relative;z-index:1}
-.hero-meta{display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap;position:relative;z-index:1}
-.meta-chip{font-size:12px;color:#7dd3fc;background:rgba(37,99,235,.14);border:1px solid rgba(96,165,250,.35);border-radius:999px;padding:3px 12px}
-.hero-links{display:flex;gap:14px;justify-content:center;margin-top:26px;flex-wrap:wrap;position:relative;z-index:1}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 24px;border-radius:10px;font-size:14px;font-weight:600;transition:all .2s;border:1px solid transparent}
-.btn-primary{background:linear-gradient(135deg,#2563eb,#0ea5e9);color:#fff;box-shadow:0 8px 24px rgba(37,99,235,.4)}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(37,99,235,.5)}
-.btn-ghost{background:rgba(255,255,255,.08);color:#e2e8f0;border-color:rgba(255,255,255,.25)}
-.btn-ghost:hover{background:rgba(255,255,255,.15);transform:translateY(-2px)}
-.btn .icon{font-size:15px}
-/* ========== 通用区块 ========== */
+.sys-btn{padding:6px 13px;border-radius:8px;font-size:12.5px;font-weight:600;white-space:nowrap;transition:all .2s}
+.sys-btn.main{background:linear-gradient(135deg,#2563eb,#0ea5e9);color:#fff;font-weight:600}
+.sys-btn.main:hover{box-shadow:0 4px 14px rgba(37,99,235,.45)}
+.sys-btn.sub{background:rgba(255,255,255,.08);color:#cbd5e1;border:1px solid rgba(255,255,255,.18)}
+.sys-btn.sub:hover{background:rgba(255,255,255,.15);color:#e2e8f0}
+/* ===== 页头横幅 ===== */
+.pagehead{background:linear-gradient(135deg,#1e3a8a 0%,#155e75 55%,#0f172a 100%);padding:34px 24px 30px;text-align:center;position:relative;overflow:hidden}
+.pagehead::before{content:'';position:absolute;top:-100px;right:-100px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(96,165,250,.16),transparent 70%)}
+.pagehead h1{font-size:26px;font-weight:800;letter-spacing:3px;color:#f8fafc;position:relative;z-index:1}
+.pagehead .sub{font-size:13px;color:#94a3b8;margin-top:6px;position:relative;z-index:1}
+.kpi-strip{display:flex;gap:8px;justify-content:center;margin-top:16px;flex-wrap:wrap;position:relative;z-index:1}
+.kpi-chip{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:5px 14px;font-size:12px;color:#cbd5e1;backdrop-filter:blur(4px)}
+.kpi-chip b{color:#7dd3fc;font-weight:700;font-variant-numeric:tabular-nums}
+/* ===== 通用 ===== */
 .container{max-width:1080px;margin:0 auto;padding:0 20px}
-.section{padding:50px 0 6px}
-.section-title{font-size:21px;font-weight:700;color:#f1f5f9;text-align:center;letter-spacing:1px;margin-bottom:8px}
+.section{padding:36px 0 4px}
+.section-title{font-size:19px;font-weight:700;color:#f1f5f9;text-align:center;letter-spacing:1px;margin-bottom:6px}
 .section-title span{background:linear-gradient(135deg,#60a5fa,#22d3ee);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.section-desc{text-align:center;color:#94a3b8;font-size:13px;margin-bottom:28px}
-/* ========== 概览 + 最新动态 ========== */
-.ov-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:18px;padding-bottom:44px;align-items:stretch}
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.stat{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;justify-content:center}
-.stat .num{font-size:26px;font-weight:800;background:linear-gradient(135deg,#60a5fa,#22d3ee);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-family:'DIN Alternate','Roboto',sans-serif;letter-spacing:-.02em;line-height:1.2}
-.stat .num b{font-size:13px;font-weight:600;-webkit-text-fill-color:#94a3b8;margin-left:3px}
-.stat .label{font-size:12px;color:#94a3b8;margin-top:4px}
-.news-box{background:#1e293b;border:1px solid #334155;border-radius:14px;padding:20px 22px;display:flex;flex-direction:column}
-.news-box h3{font-size:15px;font-weight:700;color:#f1f5f9;margin-bottom:14px;display:flex;align-items:center;gap:8px}
-.news-box h3::before{content:'';width:4px;height:15px;border-radius:2px;background:linear-gradient(180deg,#2563eb,#0ea5e9)}
-.news-list{display:flex;flex-direction:column}
-.news-item{display:flex;gap:12px;padding:9px 0;border-bottom:1px dashed #334155}
-.news-item:last-child{border-bottom:none}
-.news-date{flex-shrink:0;width:48px;height:22px;border-radius:6px;background:rgba(37,99,235,.16);border:1px solid rgba(96,165,250,.3);color:#7dd3fc;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;margin-top:2px}
-.news-title{font-size:13.5px;font-weight:600;color:#e2e8f0;line-height:1.4}
-.news-desc{font-size:12px;color:#94a3b8;margin-top:2px;line-height:1.5}
-/* ========== 进度速览 ========== */
-.progress-head{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:18px;flex-wrap:wrap}
-.ptab{padding:8px 22px;border-radius:9px;border:1px solid #475569;font-size:14px;font-weight:600;background:#1e293b;color:#94a3b8;cursor:pointer;transition:all .2s}
+.section-desc{text-align:center;color:#94a3b8;font-size:12.5px;margin-bottom:20px}
+/* ===== 进度速览 ===== */
+.progress-head{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.ptab{padding:7px 20px;border-radius:9px;border:1px solid #475569;font-size:13.5px;font-weight:600;background:#1e293b;color:#94a3b8;cursor:pointer;transition:all .2s}
 .ptab:hover{color:#e2e8f0;border-color:#64748b}
 .ptab.active{background:linear-gradient(135deg,#2563eb,#0ea5e9);color:#fff;box-shadow:0 4px 16px rgba(37,99,235,.4);border-color:transparent}
 .ptab-range{font-size:12px;color:#64748b}
-.table-card{background:#1e293b;border:1px solid #334155;border-radius:14px;padding:16px;margin-bottom:14px;overflow-x:auto}
-.progress-table{width:100%;border-collapse:collapse;font-size:13px;min-width:660px}
+.table-card{background:#1e293b;border:1px solid #334155;border-radius:14px;padding:14px;margin-bottom:12px;overflow-x:auto}
+.progress-table{width:100%;border-collapse:collapse;font-size:13px;min-width:640px}
 .progress-table thead tr.hg{background:linear-gradient(135deg,#1e40af,#1d4ed8)}
-.progress-table th{padding:8px 10px;text-align:center;font-weight:600;color:#f1f5f9;white-space:nowrap;font-size:12px;letter-spacing:.3px;border-right:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12)}
+.progress-table th{padding:7px 10px;text-align:center;font-weight:600;color:#f1f5f9;white-space:nowrap;font-size:12px;letter-spacing:.3px;border-right:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12)}
 .progress-table thead tr.hg th{font-size:13px}
 .progress-table th.grp-jz{background:rgba(96,165,250,.25)}
 .progress-table th.grp-xj{background:rgba(74,222,128,.20)}
 .progress-table th.grp-rate{background:rgba(251,191,36,.15)}
-.progress-table td{padding:8px 10px;text-align:center;border-bottom:1px solid #334155;color:#cbd5e1;font-size:13px;font-variant-numeric:tabular-nums}
+.progress-table td{padding:7px 10px;text-align:center;border-bottom:1px solid #334155;color:#cbd5e1;font-size:13px;font-variant-numeric:tabular-nums}
 .progress-table tbody tr:nth-child(odd) td{background:#243247}
 .progress-table tbody tr:hover td{background:#2f3f57}
 .progress-table td.name{font-weight:600;color:#f1f5f9;white-space:nowrap}
@@ -91,46 +72,36 @@ a{text-decoration:none;color:inherit}
 .rate-low{color:#f87171;font-weight:600}
 .rk{font-size:10px;color:#64748b;margin-left:3px}
 .total-row td{background:linear-gradient(90deg,#1e3a5f,#243247)!important;font-weight:700;color:#93c5fd;border-top:2px solid #475569}
-.note{font-size:11.5px;color:#64748b;text-align:center;margin-bottom:40px;line-height:1.7}
-/* ========== 核心业务 ========== */
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding-bottom:40px}
-.card{background:#1e293b;border:1px solid #334155;border-radius:14px;padding:22px;transition:all .25s;position:relative;overflow:hidden}
-.card:hover{transform:translateY(-4px);border-color:#475569;box-shadow:0 12px 32px rgba(0,0,0,.35)}
-.card::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,#2563eb,#0ea5e9);opacity:.85}
-.card-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:21px;margin-bottom:12px;background:rgba(37,99,235,.15)}
-.card h3{font-size:16px;font-weight:700;color:#f1f5f9;margin-bottom:7px}
-.card p{font-size:13px;color:#94a3b8}
-.card .tag{display:inline-block;margin-top:11px;font-size:12px;color:#7dd3fc;background:rgba(37,99,235,.12);border:1px solid rgba(96,165,250,.3);padding:3px 10px;border-radius:999px}
-/* ========== 系统入口 ========== */
-.entry{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding-bottom:48px}
-.entry-card{background:linear-gradient(135deg,#1e293b,#0f172a);border:1px solid #334155;border-radius:14px;padding:24px;display:flex;flex-direction:column;transition:all .25s}
-.entry-card:hover{border-color:#60a5fa;transform:translateY(-3px);box-shadow:0 10px 28px rgba(37,99,235,.2)}
-.entry-card h3{font-size:16px;font-weight:700;color:#f1f5f9;margin-bottom:7px}
-.entry-card p{font-size:13px;color:#94a3b8;margin-bottom:14px;flex:1}
-.entry-link{display:inline-flex;align-items:center;gap:6px;color:#7dd3fc;font-size:14px;font-weight:600}
-.entry-link:hover{color:#38bdf8}
-/* ========== 页脚 ========== */
-.footer{text-align:center;color:#64748b;font-size:12px;padding:30px 20px;border-top:1px solid #1e293b;margin-top:28px}
+.note{font-size:11.5px;color:#64748b;text-align:center;margin-bottom:36px;line-height:1.7}
+/* ===== 最新动态 ===== */
+.news-card{background:#1e293b;border:1px solid #334155;border-radius:14px;padding:18px 22px;margin-bottom:36px}
+.news-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;gap:10px;flex-wrap:wrap}
+.news-head h3{font-size:15px;font-weight:700;color:#f1f5f9;display:flex;align-items:center;gap:8px}
+.news-head h3::before{content:'';width:4px;height:15px;border-radius:2px;background:linear-gradient(180deg,#2563eb,#0ea5e9)}
+.news-updated{font-size:11.5px;color:#64748b}
+.news-item{display:flex;gap:12px;padding:10px 0;border-bottom:1px dashed #334155}
+.news-item:last-child{border-bottom:none}
+.news-date{flex-shrink:0;min-width:48px;height:22px;border-radius:6px;background:rgba(37,99,235,.16);border:1px solid rgba(96,165,250,.3);color:#7dd3fc;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;margin-top:2px;padding:0 6px}
+.news-body{flex:1;min-width:0}
+.news-title{font-size:13.5px;font-weight:600;color:#e2e8f0;line-height:1.4}
+.news-desc{font-size:12.5px;color:#94a3b8;margin-top:2px;line-height:1.55}
+.news-empty{color:#64748b;font-size:13px;text-align:center;padding:24px 0}
+/* ===== 加载与页脚 ===== */
+.loading{color:#64748b;font-size:13px;text-align:center;padding:20px 0}
+.footer{text-align:center;color:#64748b;font-size:12px;padding:26px 20px;border-top:1px solid #1e293b;margin-top:8px}
 .footer b{color:#94a3b8;font-weight:600}
-@media(max-width:860px){
-.ov-grid{grid-template-columns:1fr}
-.stats{grid-template-columns:1fr 1fr 1fr}
-}
+.manage-link{color:#475569;font-size:11px;transition:color .2s}
+.manage-link:hover{color:#64748b}
 @media(max-width:768px){
-.hero{padding:40px 16px 32px}
-.hero h1{font-size:26px;letter-spacing:2px}
-.nav-inner{height:54px}
+.nav-inner{height:52px}
 .brand-cn{display:none}
 .brand-name{font-size:14px}
-.stats{grid-template-columns:1fr 1fr}
-.cards{grid-template-columns:1fr}
-.entry{grid-template-columns:1fr}
-.btn{width:100%;justify-content:center}
+.nav-right .sys-btn.sub{display:none}
+.progress-table{min-width:560px}
 }
 @media(max-width:520px){
-.stats{grid-template-columns:1fr 1fr}
-.stat{padding:12px 14px}
-.stat .num{font-size:21px}
+.pagehead h1{font-size:21px;letter-spacing:2px}
+.nav-links{display:none}
 }
 </style>
 </head>
@@ -146,84 +117,27 @@ a{text-decoration:none;color:inherit}
         <span class="brand-name">云网工程建设中心</span>
       </div>
     </a>
-    <nav class="nav-links" id="navLinks">
-      <a href="#overview">数据概览</a>
-      <a href="#news">最新动态</a>
-      <a href="#progress">进度速览</a>
-      <a href="#business">核心业务</a>
-      <a href="#entry">系统入口</a>
-    </nav>
+    <div class="nav-right">
+      <nav class="nav-links" id="navLinks">
+        <a href="#progress">进度速览</a>
+        <a href="#news">最新动态</a>
+      </nav>
+      <a class="sys-btn sub" href="https://yydxgjzx.github.io/up/" target="_blank">阻力系统</a>
+      <a class="sys-btn main" href="https://yydxgjzx.github.io/" target="_blank">进度看板</a>
+    </div>
   </div>
 </header>
 
-<!-- 首屏 -->
-<div class="hero">
-  <div class="hero-badge">中国电信 · 岳阳分公司</div>
+<!-- 页头横幅 -->
+<div class="pagehead">
   <h1>云网工程建设中心</h1>
-  <p class="subtitle">以数据驱动工程管理，以 AI 赋能提质增效。聚焦工程验收、施工协调与进度管控，构建工程建设管理全流程闭环。</p>
-  <div class="hero-meta">
-    <span class="meta-chip">数据截至 2026-10-29</span>
-    <span class="meta-chip">结转工程 599 个 · 新建工程 291 个</span>
-    <span class="meta-chip">每日 9:00 自动更新</span>
-  </div>
-  <div class="hero-links">
-    <a class="btn btn-primary" href="https://yydxgjzx.github.io/" target="_blank"><span class="icon">📊</span> 工程验收进度看板</a>
-    <a class="btn btn-ghost" href="https://yydxgjzx.github.io/up/" target="_blank"><span class="icon">🔧</span> 施工阻力协调系统</a>
-  </div>
+  <p class="sub">工程进度速览 · 部门动态发布</p>
+  <div class="kpi-strip" id="kpiStrip"><span class="kpi-chip">数据加载中…</span></div>
 </div>
 
 <div class="container">
 
-  <!-- 数据概览 + 最新动态 -->
-  <div class="section" id="overview">
-    <h2 class="section-title">数据<span>概览</span></h2>
-    <p class="section-desc">截至 2026 年 10 月 29 日 · 每日 9:00 自动更新</p>
-    <div class="ov-grid">
-      <div class="stats" id="stats"></div>
-      <div class="news-box" id="news">
-        <h3>工程建设中心最新动态</h3>
-        <div class="news-list">
-          <div class="news-item">
-            <span class="news-date">10-29</span>
-            <div>
-              <div class="news-title">中心宣传网站上线</div>
-              <div class="news-desc">集中展示核心业务、每周与每月各工程管理员进度、最新动态，网页手机均可访问。</div>
-            </div>
-          </div>
-          <div class="news-item">
-            <span class="news-date">10-28</span>
-            <div>
-              <div class="news-title">施工阻力协调系统 v1.7.2 发布</div>
-              <div class="news-desc">新增填报人删除功能：填报人可删除自己填报的待受理工单，删除前专属确认，全流程留痕，Web 与小程序同步生效。</div>
-            </div>
-          </div>
-          <div class="news-item">
-            <span class="news-date">10-27</span>
-            <div>
-              <div class="news-title">看板自动更新链路优化</div>
-              <div class="news-desc">定时任务运行时长上限提升至 4 小时，超时自动捕获与清理，每日更新稳定性进一步增强。</div>
-            </div>
-          </div>
-          <div class="news-item">
-            <span class="news-date">10-28</span>
-            <div>
-              <div class="news-title">小程序 v1.7.2 已上传</div>
-              <div class="news-desc">工程验收看板小程序同步更新待受理工单删除功能，已提交微信公众平台审核发布。</div>
-            </div>
-          </div>
-          <div class="news-item">
-            <span class="news-date">常设</span>
-            <div>
-              <div class="news-title">每日 9:00 看板自动更新</div>
-              <div class="news-desc">自动完成 4 个目标 Excel 更新、数据提取、看板生成、云数据库同步与线上部署，全程零人工干预。</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 进度速览：周 / 月 -->
+  <!-- 进度速览 -->
   <div class="section" id="progress">
     <h2 class="section-title">进度<span>速览</span></h2>
     <p class="section-desc">各工程管理员每周 / 每月工程验收与关闭进度</p>
@@ -248,77 +162,58 @@ a{text-decoration:none;color:inherit}
             <th>结转</th><th>新建</th>
           </tr>
         </thead>
-        <tbody id="pbody"></tbody>
+        <tbody id="pbody"><tr><td colspan="8" class="loading">进度数据加载中…</td></tr></tbody>
       </table>
     </div>
-    <p class="note">口径说明：本周进度为较上周一（10 月 26 日）累计新增完成数，本月进度为较月初（10 月 1 日）累计新增完成数；当前验收率为截至 10 月 29 日全程累计比率。<br>数据来源：在建工程明细总表 · 结转 599 个（验收率 93.2%）· 新建 291 个（验收率 33.3%）</p>
+    <p class="note" id="pnote"></p>
   </div>
 
-  <!-- 核心业务 -->
-  <div class="section" id="business">
-    <h2 class="section-title">核心<span>业务</span></h2>
-    <p class="section-desc">覆盖工程建设管理全流程的数字化能力</p>
-    <div class="cards">
-      <div class="card">
-        <div class="card-icon">📊</div>
-        <h3>工程验收进度看板</h3>
-        <p>实时呈现结转、新建、挂账、转固四类工程的验收率、关闭率、超期与转固进度，支持工程管理员、施工单位、区域三维度统计排名。</p>
-        <span class="tag">KPI · 图表 · 明细联动</span>
+  <!-- 最新动态 -->
+  <div class="section" id="news">
+    <h2 class="section-title">最新<span>动态</span></h2>
+    <p class="section-desc">部门工作动态，由管理员发布更新</p>
+    <div class="news-card">
+      <div class="news-head">
+        <h3>工程建设中心最新动态</h3>
+        <span class="news-updated" id="newsUpdated"></span>
       </div>
-      <div class="card">
-        <div class="card-icon">🔧</div>
-        <h3>施工阻力协调系统</h3>
-        <p>施工阻力在线填报、受理、反馈、确认全流程闭环管理，超时预警、状态统计、一键导出，解决阻工沟通不畅、跟踪不力问题。</p>
-        <span class="tag">全流程留痕 · 超时倒计时</span>
-      </div>
-      <div class="card">
-        <div class="card-icon">🤖</div>
-        <h3>AI 赋能工程管理</h3>
-        <p>AI 自动完成数据提取、看板生成与每日定时更新；结算资料智能审核，自动校验定额匹配、费用计算与跨表一致性并生成审计报告。</p>
-        <span class="tag">本地处理 · 自动审核</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- 系统入口 -->
-  <div class="section" id="entry">
-    <h2 class="section-title">系统<span>入口</span></h2>
-    <p class="section-desc">网页端 · 微信小程序 · 数据同步</p>
-    <div class="entry">
-      <div class="entry-card">
-        <h3>工程验收进度看板系统</h3>
-        <p>四类工程进度总览、多维统计排名、超期工程清单、月度目标完成情况，手机电脑均可访问。</p>
-        <a class="entry-link" href="https://yydxgjzx.github.io/" target="_blank">访问看板 →</a>
-      </div>
-      <div class="entry-card">
-        <h3>施工阻力协调系统</h3>
-        <p>阻工问题在线填报与受理、全流程跟踪、借料管理，与看板同一账号体系，一次登录双系统可用。</p>
-        <a class="entry-link" href="https://yydxgjzx.github.io/up/" target="_blank">访问系统 →</a>
-      </div>
+      <div id="newsList" class="news-list"><div class="loading">动态加载中…</div></div>
     </div>
   </div>
 
 </div>
 
 <div class="footer">
-  <b>岳阳电信云网工程建设中心</b> · 数据全程本地处理 · 网页端与微信小程序多端同步<br>
+  <b>岳阳电信云网工程建设中心</b> · 数据每日 9:00 自动更新<br>
   <span style="opacity:.7">© 2026 中国电信股份有限公司岳阳分公司 云网工程建设中心</span>
+  <br><a class="manage-link" href="manage.html">动态管理</a>
 </div>
 
 <script>
-const P = {"asOf":"2026-10-29","weekBase":"2026-10-26","monthBase":"2026-10-01","items":[{"name":"曹毅","jz":{"total":81,"acceptCount":75,"acceptRate":0.9259,"acceptRank":6,"acceptGap":6,"closeCount":74,"closeRate":0.9136,"closeRank":5,"weekAccept":0,"weekClose":0,"weekTotal":0,"monthAccept":0,"monthClose":0,"monthTotal":0},"xj":{"total":33,"acceptCount":14,"acceptRate":0.4242,"acceptRank":3,"acceptGap":1,"closeCount":1,"closeRate":0.0303,"closeRank":7,"weekAccept":2,"weekClose":0,"weekTotal":2,"monthAccept":3,"monthClose":0,"monthTotal":3}},{"name":"陈凌","jz":{"total":56,"acceptCount":54,"acceptRate":0.9643,"acceptRank":1,"acceptGap":2,"closeCount":54,"closeRate":0.9643,"closeRank":1,"weekAccept":0,"weekClose":0,"weekTotal":0,"monthAccept":0,"monthClose":0,"monthTotal":0},"xj":{"total":44,"acceptCount":6,"acceptRate":0.1364,"acceptRank":7,"acceptGap":14,"closeCount":6,"closeRate":0.1364,"closeRank":6,"weekAccept":0,"weekClose":0,"weekTotal":0,"monthAccept":1,"monthClose":3,"monthTotal":4}},{"name":"丰中山","jz":{"total":75,"acceptCount":71,"acceptRate":0.9467,"acceptRank":3,"acceptGap":4,"closeCount":71,"closeRate":0.9467,"closeRank":2,"weekAccept":0,"weekClose":0,"weekTotal":0,"monthAccept":0,"monthClose":0,"monthTotal":0},"xj":{"total":36,"acceptCount":16,"acceptRate":0.4444,"acceptRank":2,"acceptGap":0,"closeCount":10,"closeRate":0.2778,"closeRank":1,"weekAccept":0,"weekClose":0,"weekTotal":0,"monthAccept":1,"monthClose":1,"monthTotal":2}},{"name":"蒋志昭","jz":{"total":102,"acceptCount":98,"acceptRate":0.9608,"acceptRank":2,"acceptGap":4,"closeCount":95,"closeRate":0.9314,"closeRank":4,"weekAccept":0,"weekClose":1,"weekTotal":1,"monthAccept":1,"monthClose":3,"monthTotal":4},"xj":{"total":44,"acceptCount":11,"acceptRate":0.25,"acceptRank":6,"acceptGap":9,"closeCount":9,"closeRate":0.2045,"closeRank":3,"weekAccept":0,"weekClose":1,"weekTotal":1,"monthAccept":2,"monthClose":3,"monthTotal":5}},{"name":"李力","jz":{"total":51,"acceptCount":48,"acceptRate":0.9412,"acceptRank":4,"acceptGap":3,"closeCount":46,"closeRate":0.902,"closeRank":6,"weekAccept":0,"weekClose":0,"weekTotal":0,"monthAccept":0,"monthClose":1,"monthTotal":1},"xj":{"total":40,"acceptCount":12,"acceptRate":0.3,"acceptRank":4,"acceptGap":6,"closeCount":10,"closeRate":0.25,"closeRank":2,"weekAccept":0,"weekClose":0,"weekTotal":0,"monthAccept":1,"monthClose":3,"monthTotal":4}},{"name":"刘益锴","jz":{"total":116,"acceptCount":101,"acceptRate":0.8707,"acceptRank":7,"acceptGap":15,"closeCount":93,"closeRate":0.8017,"closeRank":7,"weekAccept":0,"weekClose":0,"weekTotal":0,"monthAccept":0,"monthClose":0,"monthTotal":0},"xj":{"total":50,"acceptCount":14,"acceptRate":0.28,"acceptRank":5,"acceptGap":8,"closeCount":8,"closeRate":0.16,"closeRank":5,"weekAccept":0,"weekClose":0,"weekTotal":0,"monthAccept":0,"monthClose":0,"monthTotal":0}},{"name":"孙志祥","jz":{"total":118,"acceptCount":111,"acceptRate":0.9407,"acceptRank":5,"acceptGap":7,"closeCount":110,"closeRate":0.9322,"closeRank":3,"weekAccept":0,"weekClose":0,"weekTotal":0,"monthAccept":0,"monthClose":1,"monthTotal":1},"xj":{"total":44,"acceptCount":24,"acceptRate":0.5455,"acceptRank":1,"acceptGap":0,"closeCount":9,"closeRate":0.2045,"closeRank":3,"weekAccept":0,"weekClose":1,"weekTotal":1,"monthAccept":0,"monthClose":1,"monthTotal":1}}],"jz_total":{"total":599,"acceptCount":558,"acceptRate":0.9316,"closeCount":543,"closeRate":0.9065,"weekAccept":0,"weekClose":1,"weekTotal":1,"monthAccept":1,"monthClose":5,"monthTotal":6},"xj_total":{"total":291,"acceptCount":97,"acceptRate":0.3333,"closeCount":53,"closeRate":0.1821,"weekAccept":2,"weekClose":2,"weekTotal":4,"monthAccept":8,"monthClose":11,"monthTotal":19},"gz":{"totalAmount":9634.9,"totalRate":0.7087,"monthAmount":416},"zg":{"closedCount":742,"zhuanguDone":11702.7,"zhuanguRate":0.6238,"monthAmount":1595.1}};
+let P = null;
 
-/* 数据概览 KPI */
-document.getElementById('stats').innerHTML = [
-  '<div class="stat"><div class="num">890</div><div class="label">在管工程总数</div></div>',
-  '<div class="stat"><div class="num">599</div><div class="label">结转工程数 · 验收率 93.2%</div></div>',
-  '<div class="stat"><div class="num">291</div><div class="label">新建工程数 · 验收率 33.3%</div></div>',
-  '<div class="stat"><div class="num">7</div><div class="label">工程管理员 · 10 个区域</div></div>',
-  '<div class="stat"><div class="num">11703<b>万</b></div><div class="label">累计转固金额 · 转固率 62.4%</div></div>',
-  '<div class="stat"><div class="num">9635<b>万</b></div><div class="label">累计挂账金额 · 挂账率 70.9%</div></div>'
-].join('');
+/* ===== 加载进度数据 ===== */
+fetch('progress.json?t=' + Date.now())
+  .then(r => r.json())
+  .then(d => { P = d; renderKpi(); switchTab('week'); })
+  .catch(() => {
+    document.getElementById('pbody').innerHTML = '<tr><td colspan="8" class="loading">进度数据加载失败，请刷新重试</td></tr>';
+    document.getElementById('kpiStrip').innerHTML = '<span class="kpi-chip">数据加载失败</span>';
+  });
 
-/* 进度表 */
+/* ===== KPI 徽章 ===== */
+function renderKpi(){
+  const jz = P.jz_total, xj = P.xj_total;
+  document.getElementById('kpiStrip').innerHTML = [
+    '<span class="kpi-chip">数据截至 <b>' + P.asOf + '</b></span>',
+    '<span class="kpi-chip">结转工程 <b>' + jz.total + '</b> 个 · 验收率 <b>' + (jz.acceptRate*100).toFixed(1) + '%</b></span>',
+    '<span class="kpi-chip">新建工程 <b>' + xj.total + '</b> 个 · 验收率 <b>' + (xj.acceptRate*100).toFixed(1) + '%</b></span>',
+    '<span class="kpi-chip">累计转固 <b>' + Math.round(P.zg.zhuanguDone) + '</b> 万</span>',
+    '<span class="kpi-chip">累计挂账 <b>' + Math.round(P.gz.totalAmount) + '</b> 万</span>'
+  ].join('');
+}
+
+/* ===== 进度表 ===== */
 function d(v){ return v>0 ? '<span class="delta up">+'+v+'</span>' : '<span class="delta">0</span>'; }
 function rct(rate,rank){ const cls = rank<=3?'rate-top':(rank>=5?'rate-low':'rate-mid'); return '<span class="'+cls+'">'+(rate*100).toFixed(1)+'%</span><span class="rk">#'+rank+'</span>'; }
 function render(period){
@@ -356,17 +251,40 @@ function switchTab(period){
   document.getElementById('tabWeek').classList.toggle('active', period==='week');
   document.getElementById('tabMonth').classList.toggle('active', period==='month');
   document.getElementById('thSum').textContent = period==='week' ? '本周合计' : '本月合计';
-  document.getElementById('tabRange').textContent = period==='week' ? '（10.26 – 10.29）' : '（10.01 – 10.29）';
+  document.getElementById('tabRange').textContent = period==='week'
+    ? '（' + P.weekBase.slice(5).replace('-','.') + ' – ' + P.asOf.slice(5).replace('-','.') + '）'
+    : '（' + P.monthBase.slice(5).replace('-','.') + ' – ' + P.asOf.slice(5).replace('-','.') + '）';
   render(period);
+  document.getElementById('pnote').innerHTML = '口径说明：本周进度为较本周一（' + P.weekBase + '）累计新增完成数，本月进度为较月初（' + P.monthBase + '）累计新增完成数；当前验收率为截至 ' + P.asOf + ' 全程累计比率。<br>数据来源：在建工程明细总表 · 结转 ' + P.jz_total.total + ' 个（验收率 ' + (P.jz_total.acceptRate*100).toFixed(1) + '%）· 新建 ' + P.xj_total.total + ' 个（验收率 ' + (P.xj_total.acceptRate*100).toFixed(1) + '%）';
 }
-switchTab('week');
 
-/* 导航高亮 */
+/* ===== 加载最新动态 ===== */
+fetch('news.json?t=' + Date.now())
+  .then(r => r.json())
+  .then(d => {
+    document.getElementById('newsUpdated').textContent = d.updatedAt ? '更新于 ' + d.updatedAt : '';
+    const list = d.items || [];
+    if (!list.length) {
+      document.getElementById('newsList').innerHTML = '<div class="news-empty">暂无动态</div>';
+      return;
+    }
+    document.getElementById('newsList').innerHTML = list.map(it =>
+      '<div class="news-item"><span class="news-date">' + (it.date||'') + '</span>'
+      + '<div class="news-body"><div class="news-title">' + (it.title||'') + '</div>'
+      + (it.desc ? '<div class="news-desc">' + it.desc + '</div>' : '')
+      + '</div></div>'
+    ).join('');
+  })
+  .catch(() => {
+    document.getElementById('newsList').innerHTML = '<div class="news-empty">动态加载失败，请刷新重试</div>';
+  });
+
+/* ===== 导航高亮 ===== */
 const links = document.querySelectorAll('#navLinks a');
-const secs = links.length ? Array.from(links).map(a=>document.querySelector(a.getAttribute('href'))) : [];
+const secs = Array.from(links).map(a=>document.querySelector(a.getAttribute('href')));
 window.addEventListener('scroll', ()=>{
   let cur = -1;
-  secs.forEach((s,i)=>{ if(s && s.getBoundingClientRect().top < 120) cur = i; });
+  secs.forEach((s,i)=>{ if(s && s.getBoundingClientRect().top < 130) cur = i; });
   links.forEach((a,i)=>a.classList.toggle('active', i===cur));
 }, {passive:true});
 </script>

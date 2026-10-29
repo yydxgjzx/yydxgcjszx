@@ -1,0 +1,18 @@
+{
+ "asOf": "2026-10-29",
+ "weekBase": "2026-10-26",
+ "monthBase": "2026-10-01",
+ "items": [
+  {"name":"曹毅","jz":{"total":81,"acceptCount":75,"acceptRate":0.9259,"acceptRank":6,"closeCount":74,"closeRate":0.9136,"closeRank":5,"weekAccept":0,"weekClose":0,"monthAccept":0,"monthClose":0},"xj":{"total":33,"acceptCount":14,"acceptRate":0.4242,"acceptRank":3,"closeCount":1,"closeRate":0.0303,"closeRank":7,"weekAccept":2,"weekClose":0,"monthAccept":3,"monthClose":0}},
+  {"name":"陈凌","jz":{"total":56,"acceptCount":54,"acceptRate":0.9643,"acceptRank":1,"closeCount":54,"closeRate":0.9643,"closeRank":1,"weekAccept":0,"weekClose":0,"monthAccept":0,"monthClose":0},"xj":{"total":44,"acceptCount":6,"acceptRate":0.1364,"acceptRank":7,"closeCount":6,"closeRate":0.1364,"closeRank":6,"weekAccept":0,"weekClose":0,"monthAccept":1,"monthClose":3}},
+  {"name":"丰中山","jz":{"total":75,"acceptCount":71,"acceptRate":0.9467,"acceptRank":3,"closeCount":71,"closeRate":0.9467,"closeRank":2,"weekAccept":0,"weekClose":0,"monthAccept":0,"monthClose":0},"xj":{"total":36,"acceptCount":16,"acceptRate":0.4444,"acceptRank":2,"closeCount":10,"closeRate":0.2778,"closeRank":1,"weekAccept":0,"weekClose":0,"monthAccept":1,"monthClose":1}},
+  {"name":"蒋志昭","jz":{"total":102,"acceptCount":98,"acceptRate":0.9608,"acceptRank":2,"closeCount":95,"closeRate":0.9314,"closeRank":4,"weekAccept":0,"weekClose":1,"monthAccept":1,"monthClose":3},"xj":{"total":44,"acceptCount":11,"acceptRate":0.25,"acceptRank":6,"closeCount":9,"closeRate":0.2045,"closeRank":3,"weekAccept":0,"weekClose":1,"monthAccept":2,"monthClose":3}},
+  {"name":"李力","jz":{"total":51,"acceptCount":48,"acceptRate":0.9412,"acceptRank":4,"closeCount":46,"closeRate":0.902,"closeRank":6,"weekAccept":0,"weekClose":0,"monthAccept":0,"monthClose":1},"xj":{"total":40,"acceptCount":12,"acceptRate":0.3,"acceptRank":4,"closeCount":10,"closeRate":0.25,"closeRank":2,"weekAccept":0,"weekClose":0,"monthAccept":1,"monthClose":3}},
+  {"name":"刘益锴","jz":{"total":116,"acceptCount":101,"acceptRate":0.8707,"acceptRank":7,"closeCount":93,"closeRate":0.8017,"closeRank":7,"weekAccept":0,"weekClose":0,"monthAccept":0,"monthClose":0},"xj":{"total":50,"acceptCount":14,"acceptRate":0.28,"acceptRank":5,"closeCount":8,"closeRate":0.16,"closeRank":5,"weekAccept":0,"weekClose":0,"monthAccept":0,"monthClose":0}},
+  {"name":"孙志祥","jz":{"total":118,"acceptCount":111,"acceptRate":0.9407,"acceptRank":5,"closeCount":110,"closeRate":0.9322,"closeRank":3,"weekAccept":0,"weekClose":0,"monthAccept":0,"monthClose":1},"xj":{"total":44,"acceptCount":24,"acceptRate":0.5455,"acceptRank":1,"closeCount":9,"closeRate":0.2045,"closeRank":3,"weekAccept":0,"weekClose":1,"monthAccept":0,"monthClose":1}}
+ ],
+ "jz_total": {"total":599,"acceptCount":558,"acceptRate":0.9316,"closeCount":543,"closeRate":0.9065,"weekAccept":0,"weekClose":1,"monthAccept":1,"monthClose":5},
+ "xj_total": {"total":291,"acceptCount":97,"acceptRate":0.3333,"closeCount":53,"closeRate":0.1821,"weekAccept":2,"weekClose":2,"monthAccept":8,"monthClose":11},
+ "gz": {"totalAmount":9634.9,"totalRate":0.7087,"monthAmount":416},
+ "zg": {"closedCount":742,"zhuanguDone":11702.7,"zhuanguRate":0.6238,"monthAmount":1595.1}
+}

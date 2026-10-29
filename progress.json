@@ -1,14 +1,14 @@
 {
   "asOf": "2026-10-29",
-  "kpi": { "total": 890, "accept": 655, "zhuangu": 11702.7 },
-  "center": { "total": 890, "accept": 655, "rate": 0.736 },
+  "kpi": { "total": 890, "accept": 655, "close": 596, "zhuangu": 11702.7 },
+  "center": { "total": 890, "accept": 655, "close": 596, "rate": 0.736, "closeRate": 0.670 },
   "admins": [
-    {"name": "孙志祥", "total": 162, "accept": 135, "rate": 0.833},
-    {"name": "丰中山", "total": 111, "accept": 87, "rate": 0.784},
-    {"name": "曹毅", "total": 114, "accept": 89, "rate": 0.781},
-    {"name": "蒋志昭", "total": 146, "accept": 109, "rate": 0.747},
-    {"name": "刘益锴", "total": 166, "accept": 115, "rate": 0.693},
-    {"name": "李力", "total": 91, "accept": 60, "rate": 0.659},
-    {"name": "陈凌", "total": 100, "accept": 60, "rate": 0.600}
+    {"name": "孙志祥", "total": 162, "accept": 135, "close": 119, "rate": 0.833, "closeRate": 0.735},
+    {"name": "丰中山", "total": 111, "accept": 87, "close": 81, "rate": 0.784, "closeRate": 0.730},
+    {"name": "曹毅", "total": 114, "accept": 89, "close": 75, "rate": 0.781, "closeRate": 0.658},
+    {"name": "蒋志昭", "total": 146, "accept": 109, "close": 104, "rate": 0.747, "closeRate": 0.712},
+    {"name": "刘益锴", "total": 166, "accept": 115, "close": 101, "rate": 0.693, "closeRate": 0.608},
+    {"name": "李力", "total": 91, "accept": 60, "close": 56, "rate": 0.659, "closeRate": 0.615},
+    {"name": "陈凌", "total": 100, "accept": 60, "close": 60, "rate": 0.600, "closeRate": 0.600}
   ]
 }

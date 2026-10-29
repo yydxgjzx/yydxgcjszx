@@ -84,11 +84,15 @@ textarea:focus{border-color:#3b82f6}
   <div class="login-box" id="loginBox" style="display:none">
     <div class="card">
       <div class="field">
+        <label>管理员账号</label>
+        <input type="text" id="user" placeholder="请输入管理员账号" autocomplete="username">
+      </div>
+      <div class="field">
         <label>管理密码</label>
-        <input type="password" id="pwd" placeholder="请输入动态管理密码" onkeydown="if(event.key==='Enter')login()">
+        <input type="password" id="pwd" placeholder="请输入管理密码" onkeydown="if(event.key==='Enter')login()">
       </div>
       <button class="btn btn-primary w100" onclick="login()">登 录</button>
-      <div class="err" id="loginErr">密码不正确，请重试</div>
+      <div class="err" id="loginErr">账号或密码不正确，请重试</div>
       <p class="hint" style="margin-top:16px">仅限网站管理员使用，用于发布、修改云网工程建设中心最新动态。</p>
     </div>
   </div>
@@ -113,7 +117,8 @@ textarea:focus{border-color:#3b82f6}
 
 <script>
 /* ===== 配置（口令与Token分段存储） ===== */
-const PASS = 'yydx2026';
+const USER = 'yydxvip';
+const PASS = 'yydxvip8216109';
 const _TK = ['ghp_SHsQ','rDU9BybyX','cHGzKSJHF','u2Skjaa','K0cGSLE'].join('');
 const API = 'https://api.github.com/repos/yydxgjzx/yydxgcjszx/contents/news.json';
 const GH_HEADERS = () => ({ 'Authorization': 'token ' + _TK, 'Accept': 'application/vnd.github+json' });
@@ -128,7 +133,7 @@ let lastSha = null;   // news.json 当前 sha
 })();
 
 function login(){
-  if (document.getElementById('pwd').value === PASS) {
+  if (document.getElementById('user').value.trim() === USER && document.getElementById('pwd').value === PASS) {
     localStorage.setItem('gcjszx_mgmt','1');
     document.getElementById('loginErr').style.display = 'none';
     showEdit(); load();

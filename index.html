@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0f172a">
-<meta name="description" content="岳阳电信云网工程建设中心：工程进度速览与最新动态">
+<meta name="description" content="岳阳电信云网工程建设中心：工程建设成果与部门最新动态">
 <title>岳阳电信云网工程建设中心</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232563eb'/%3E%3Ctext x='32' y='44' font-size='34' font-weight='bold' text-anchor='middle' fill='white' font-family='sans-serif'%3E云%3C/text%3E%3C/svg%3E">
 <style>
@@ -30,9 +30,9 @@ a{text-decoration:none;color:inherit}
 .sys-btn.sub{background:rgba(255,255,255,.08);color:#cbd5e1;border:1px solid rgba(255,255,255,.18)}
 .sys-btn.sub:hover{background:rgba(255,255,255,.15);color:#e2e8f0}
 /* ===== 页头横幅 ===== */
-.pagehead{background:linear-gradient(135deg,#1e3a8a 0%,#155e75 55%,#0f172a 100%);padding:34px 24px 30px;text-align:center;position:relative;overflow:hidden}
+.pagehead{background:linear-gradient(135deg,#1e3a8a 0%,#155e75 55%,#0f172a 100%);padding:40px 24px 36px;text-align:center;position:relative;overflow:hidden}
 .pagehead::before{content:'';position:absolute;top:-100px;right:-100px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(96,165,250,.16),transparent 70%)}
-.pagehead h1{font-size:26px;font-weight:800;letter-spacing:3px;color:#f8fafc;position:relative;z-index:1}
+.pagehead h1{font-size:27px;font-weight:800;letter-spacing:3px;color:#f8fafc;position:relative;z-index:1}
 .pagehead .sub{font-size:13px;color:#94a3b8;margin-top:6px;position:relative;z-index:1}
 .kpi-strip{display:flex;gap:8px;justify-content:center;margin-top:16px;flex-wrap:wrap;position:relative;z-index:1}
 .kpi-chip{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:5px 14px;font-size:12px;color:#cbd5e1;backdrop-filter:blur(4px)}
@@ -43,35 +43,22 @@ a{text-decoration:none;color:inherit}
 .section-title{font-size:19px;font-weight:700;color:#f1f5f9;text-align:center;letter-spacing:1px;margin-bottom:6px}
 .section-title span{background:linear-gradient(135deg,#60a5fa,#22d3ee);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .section-desc{text-align:center;color:#94a3b8;font-size:12.5px;margin-bottom:20px}
-/* ===== 进度速览 ===== */
-.progress-head{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
-.ptab{padding:7px 20px;border-radius:9px;border:1px solid #475569;font-size:13.5px;font-weight:600;background:#1e293b;color:#94a3b8;cursor:pointer;transition:all .2s}
-.ptab:hover{color:#e2e8f0;border-color:#64748b}
-.ptab.active{background:linear-gradient(135deg,#2563eb,#0ea5e9);color:#fff;box-shadow:0 4px 16px rgba(37,99,235,.4);border-color:transparent}
-.ptab-range{font-size:12px;color:#64748b}
-.table-card{background:#1e293b;border:1px solid #334155;border-radius:14px;padding:14px;margin-bottom:12px;overflow-x:auto}
-.progress-table{width:100%;border-collapse:collapse;font-size:13px;min-width:640px}
-.progress-table thead tr.hg{background:linear-gradient(135deg,#1e40af,#1d4ed8)}
-.progress-table th{padding:7px 10px;text-align:center;font-weight:600;color:#f1f5f9;white-space:nowrap;font-size:12px;letter-spacing:.3px;border-right:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12)}
-.progress-table thead tr.hg th{font-size:13px}
-.progress-table th.grp-jz{background:rgba(96,165,250,.25)}
-.progress-table th.grp-xj{background:rgba(74,222,128,.20)}
-.progress-table th.grp-rate{background:rgba(251,191,36,.15)}
-.progress-table td{padding:7px 10px;text-align:center;border-bottom:1px solid #334155;color:#cbd5e1;font-size:13px;font-variant-numeric:tabular-nums}
-.progress-table tbody tr:nth-child(odd) td{background:#243247}
-.progress-table tbody tr:hover td{background:#2f3f57}
-.progress-table td.name{font-weight:600;color:#f1f5f9;white-space:nowrap}
-.progress-table .col-jz{background:rgba(96,165,250,.07)!important}
-.progress-table .col-xj{background:rgba(74,222,128,.06)!important}
-.delta{color:#64748b}
-.delta.up{color:#4ade80;font-weight:700}
-.delta.sum{font-weight:700}
-.delta.sum.up{color:#34d399}
-.rate-top{color:#4ade80;font-weight:600}
-.rate-mid{color:#cbd5e1}
-.rate-low{color:#f87171;font-weight:600}
-.rk{font-size:10px;color:#64748b;margin-left:3px}
-.total-row td{background:linear-gradient(90deg,#1e3a5f,#243247)!important;font-weight:700;color:#93c5fd;border-top:2px solid #475569}
+/* ===== 建设成果 ===== */
+.result-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding-bottom:14px}
+.r-card{background:#1e293b;border:1px solid #334155;border-radius:13px;padding:18px 16px;transition:all .25s;position:relative;overflow:hidden}
+.r-card:hover{transform:translateY(-3px);border-color:#475569;box-shadow:0 10px 26px rgba(0,0,0,.3)}
+.r-name{font-size:15px;font-weight:700;color:#f1f5f9;display:flex;align-items:center;gap:8px}
+.r-name::before{content:'';width:3px;height:13px;border-radius:2px;background:linear-gradient(180deg,#60a5fa,#22d3ee)}
+.r-meta{font-size:11.5px;color:#94a3b8;margin-top:3px}
+.r-bar{height:8px;border-radius:4px;background:#334155;margin-top:12px;overflow:hidden}
+.r-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,#2563eb,#0ea5e9);transition:width .8s ease}
+.r-pct{display:flex;justify-content:space-between;align-items:baseline;margin-top:7px}
+.r-pct b{font-size:19px;font-weight:800;color:#7dd3fc;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.r-pct span{font-size:10.5px;color:#64748b}
+.r-card.center-card{background:linear-gradient(135deg,#1e3a8a,#155e75);border-color:rgba(96,165,250,.4)}
+.r-card.center-card .r-name{color:#e0f2fe}
+.r-card.center-card .r-pct b{color:#bae6fd}
+.r-card.center-card .r-fill{background:linear-gradient(90deg,#38bdf8,#22d3ee)}
 .note{font-size:11.5px;color:#64748b;text-align:center;margin-bottom:36px;line-height:1.7}
 /* ===== 最新动态 ===== */
 .news-card{background:#1e293b;border:1px solid #334155;border-radius:14px;padding:18px 22px;margin-bottom:36px}
@@ -92,12 +79,12 @@ a{text-decoration:none;color:inherit}
 .footer b{color:#94a3b8;font-weight:600}
 .manage-link{color:#475569;font-size:11px;transition:color .2s}
 .manage-link:hover{color:#64748b}
+@media(max-width:860px){.result-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:768px){
 .nav-inner{height:52px}
 .brand-cn{display:none}
 .brand-name{font-size:14px}
 .nav-right .sys-btn.sub{display:none}
-.progress-table{min-width:560px}
 }
 @media(max-width:520px){
 .pagehead h1{font-size:21px;letter-spacing:2px}
@@ -119,7 +106,7 @@ a{text-decoration:none;color:inherit}
     </a>
     <div class="nav-right">
       <nav class="nav-links" id="navLinks">
-        <a href="#progress">进度速览</a>
+        <a href="#results">建设成果</a>
         <a href="#news">最新动态</a>
       </nav>
       <a class="sys-btn sub" href="https://yydxgjzx.github.io/up/" target="_blank">阻力系统</a>
@@ -131,40 +118,17 @@ a{text-decoration:none;color:inherit}
 <!-- 页头横幅 -->
 <div class="pagehead">
   <h1>云网工程建设中心</h1>
-  <p class="sub">工程进度速览 · 部门动态发布</p>
+  <p class="sub">以数据驱动工程管理 · 以 AI 赋能提质增效</p>
   <div class="kpi-strip" id="kpiStrip"><span class="kpi-chip">数据加载中…</span></div>
 </div>
 
 <div class="container">
 
-  <!-- 进度速览 -->
-  <div class="section" id="progress">
-    <h2 class="section-title">进度<span>速览</span></h2>
-    <p class="section-desc">各工程管理员每周 / 每月工程验收与关闭进度</p>
-    <div class="progress-head">
-      <button class="ptab active" id="tabWeek" onclick="switchTab('week')">本周进度</button>
-      <button class="ptab" id="tabMonth" onclick="switchTab('month')">本月进度</button>
-      <span class="ptab-range" id="tabRange"></span>
-    </div>
-    <div class="table-card">
-      <table class="progress-table">
-        <thead>
-          <tr class="hg">
-            <th rowspan="2">工程管理员</th>
-            <th colspan="2" class="grp-jz">结转工程</th>
-            <th colspan="2" class="grp-xj">新建工程</th>
-            <th rowspan="2" id="thSum">本周合计</th>
-            <th colspan="2" class="grp-rate">当前验收率</th>
-          </tr>
-          <tr class="hg">
-            <th>验收</th><th>关闭</th>
-            <th>验收</th><th>关闭</th>
-            <th>结转</th><th>新建</th>
-          </tr>
-        </thead>
-        <tbody id="pbody"><tr><td colspan="8" class="loading">进度数据加载中…</td></tr></tbody>
-      </table>
-    </div>
+  <!-- 建设成果 -->
+  <div class="section" id="results">
+    <h2 class="section-title">建设<span>成果</span></h2>
+    <p class="section-desc" id="resultDesc">各工程管理员工程建设与验收情况</p>
+    <div class="result-grid" id="resultGrid"><div class="loading">成果数据加载中…</div></div>
     <p class="note" id="pnote"></p>
   </div>
 
@@ -177,86 +141,54 @@ a{text-decoration:none;color:inherit}
         <h3>工程建设中心最新动态</h3>
         <span class="news-updated" id="newsUpdated"></span>
       </div>
-      <div id="newsList" class="news-list"><div class="loading">动态加载中…</div></div>
+      <div id="newsList"><div class="loading">动态加载中…</div></div>
     </div>
   </div>
 
 </div>
 
 <div class="footer">
-  <b>岳阳电信云网工程建设中心</b> · 数据每日 9:00 自动更新<br>
+  <b>岳阳电信云网工程建设中心</b><br>
   <span style="opacity:.7">© 2026 中国电信股份有限公司岳阳分公司 云网工程建设中心</span>
   <br><a class="manage-link" href="manage.html">动态管理</a>
 </div>
 
 <script>
-let P = null;
-
-/* ===== 加载进度数据 ===== */
+/* ===== 加载建设成果数据 ===== */
 fetch('progress.json?t=' + Date.now())
   .then(r => r.json())
-  .then(d => { P = d; renderKpi(); switchTab('week'); })
+  .then(d => {
+    document.getElementById('resultDesc').textContent = '各工程管理员工程建设与验收情况（截至 ' + d.asOf + '）';
+    const yi = d.zhuanguYi || (d.kpi.zhuangu >= 10000 ? (d.kpi.zhuangu/10000).toFixed(2) + ' 亿元' : Math.round(d.kpi.zhuangu) + ' 万元');
+    document.getElementById('kpiStrip').innerHTML = [
+      '<span class="kpi-chip">在管工程 <b>' + d.kpi.total + '</b> 个</span>',
+      '<span class="kpi-chip">累计完成验收 <b>' + d.kpi.accept + '</b> 项</span>',
+      '<span class="kpi-chip">累计转固 <b>' + yi + '</b></span>',
+      '<span class="kpi-chip">数据截至 <b>' + d.asOf + '</b></span>'
+    ].join('');
+    const cards = d.admins.map(a =>
+      '<div class="r-card">'
+      + '<div class="r-name">' + a.name + '</div>'
+      + '<div class="r-meta">在管 ' + a.total + ' 个工程 · 已验收 ' + a.accept + ' 项</div>'
+      + '<div class="r-bar"><div class="r-fill" style="width:' + (a.rate*100).toFixed(1) + '%"></div></div>'
+      + '<div class="r-pct"><b>' + (a.rate*100).toFixed(1) + '%</b><span>验收完成率</span></div>'
+      + '</div>'
+    ).join('');
+    const c = d.center;
+    const centerCard =
+      '<div class="r-card center-card">'
+      + '<div class="r-name">中心整体</div>'
+      + '<div class="r-meta">在管 ' + c.total + ' 个工程 · 已验收 ' + c.accept + ' 项</div>'
+      + '<div class="r-bar"><div class="r-fill" style="width:' + (c.rate*100).toFixed(1) + '%"></div></div>'
+      + '<div class="r-pct"><b>' + (c.rate*100).toFixed(1) + '%</b><span>验收完成率</span></div>'
+      + '</div>';
+    document.getElementById('resultGrid').innerHTML = centerCard + cards;
+    document.getElementById('pnote').innerHTML = '以上为工程建设成果速览，详细进度数据请访问工程验收进度看板查看';
+  })
   .catch(() => {
-    document.getElementById('pbody').innerHTML = '<tr><td colspan="8" class="loading">进度数据加载失败，请刷新重试</td></tr>';
+    document.getElementById('resultGrid').innerHTML = '<div class="loading" style="grid-column:1/-1">成果数据加载失败，请刷新重试</div>';
     document.getElementById('kpiStrip').innerHTML = '<span class="kpi-chip">数据加载失败</span>';
   });
-
-/* ===== KPI 徽章 ===== */
-function renderKpi(){
-  const jz = P.jz_total, xj = P.xj_total;
-  document.getElementById('kpiStrip').innerHTML = [
-    '<span class="kpi-chip">数据截至 <b>' + P.asOf + '</b></span>',
-    '<span class="kpi-chip">结转工程 <b>' + jz.total + '</b> 个 · 验收率 <b>' + (jz.acceptRate*100).toFixed(1) + '%</b></span>',
-    '<span class="kpi-chip">新建工程 <b>' + xj.total + '</b> 个 · 验收率 <b>' + (xj.acceptRate*100).toFixed(1) + '%</b></span>',
-    '<span class="kpi-chip">累计转固 <b>' + Math.round(P.zg.zhuanguDone) + '</b> 万</span>',
-    '<span class="kpi-chip">累计挂账 <b>' + Math.round(P.gz.totalAmount) + '</b> 万</span>'
-  ].join('');
-}
-
-/* ===== 进度表 ===== */
-function d(v){ return v>0 ? '<span class="delta up">+'+v+'</span>' : '<span class="delta">0</span>'; }
-function rct(rate,rank){ const cls = rank<=3?'rate-top':(rank>=5?'rate-low':'rate-mid'); return '<span class="'+cls+'">'+(rate*100).toFixed(1)+'%</span><span class="rk">#'+rank+'</span>'; }
-function render(period){
-  let html = '';
-  P.items.forEach(it=>{
-    const jz = it.jz, xj = it.xj;
-    const a = jz[period+'Accept'], b = jz[period+'Close'], c = xj[period+'Accept'], e = xj[period+'Close'];
-    const sum = (a+b+c+e);
-    html += '<tr>'
-      + '<td class="name">'+it.name+'</td>'
-      + '<td class="col-jz">'+d(a)+'</td>'
-      + '<td class="col-jz">'+d(b)+'</td>'
-      + '<td class="col-xj">'+d(c)+'</td>'
-      + '<td class="col-xj">'+d(e)+'</td>'
-      + '<td>'+(sum>0?'<span class="delta sum up">+'+sum+'</span>':'<span class="delta">0</span>')+'</td>'
-      + '<td>'+rct(jz.acceptRate, jz.acceptRank)+'</td>'
-      + '<td>'+rct(xj.acceptRate, xj.acceptRank)+'</td>'
-      + '</tr>';
-  });
-  const jt = P.jz_total, xt = P.xj_total;
-  const ta = jt[period+'Accept'], tb = jt[period+'Close'], tc = xt[period+'Accept'], te = xt[period+'Close'];
-  html += '<tr class="total-row">'
-    + '<td class="name">合计</td>'
-    + '<td class="col-jz">'+d(ta)+'</td>'
-    + '<td class="col-jz">'+d(tb)+'</td>'
-    + '<td class="col-xj">'+d(tc)+'</td>'
-    + '<td class="col-xj">'+d(te)+'</td>'
-    + '<td>'+((ta+tb+tc+te)>0?'<span class="delta sum up">+'+(ta+tb+tc+te)+'</span>':'<span class="delta">0</span>')+'</td>'
-    + '<td>'+(jt.acceptRate*100).toFixed(1)+'%</td>'
-    + '<td>'+(xt.acceptRate*100).toFixed(1)+'%</td>'
-    + '</tr>';
-  document.getElementById('pbody').innerHTML = html;
-}
-function switchTab(period){
-  document.getElementById('tabWeek').classList.toggle('active', period==='week');
-  document.getElementById('tabMonth').classList.toggle('active', period==='month');
-  document.getElementById('thSum').textContent = period==='week' ? '本周合计' : '本月合计';
-  document.getElementById('tabRange').textContent = period==='week'
-    ? '（' + P.weekBase.slice(5).replace('-','.') + ' – ' + P.asOf.slice(5).replace('-','.') + '）'
-    : '（' + P.monthBase.slice(5).replace('-','.') + ' – ' + P.asOf.slice(5).replace('-','.') + '）';
-  render(period);
-  document.getElementById('pnote').innerHTML = '口径说明：本周进度为较本周一（' + P.weekBase + '）累计新增完成数，本月进度为较月初（' + P.monthBase + '）累计新增完成数；当前验收率为截至 ' + P.asOf + ' 全程累计比率。<br>数据来源：在建工程明细总表 · 结转 ' + P.jz_total.total + ' 个（验收率 ' + (P.jz_total.acceptRate*100).toFixed(1) + '%）· 新建 ' + P.xj_total.total + ' 个（验收率 ' + (P.xj_total.acceptRate*100).toFixed(1) + '%）';
-}
 
 /* ===== 加载最新动态 ===== */
 fetch('news.json?t=' + Date.now())

@@ -11,17 +11,18 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh;-webkit-font-smoothing:antialiased;line-height:1.6}
 a{text-decoration:none;color:inherit}
-.wrap{max-width:760px;margin:0 auto;padding:28px 20px 60px}
-.head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px;flex-wrap:wrap}
-.head h1{font-size:19px;font-weight:700;letter-spacing:1px;display:flex;align-items:center;gap:10px}
-.head h1::before{content:'';width:4px;height:18px;border-radius:2px;background:linear-gradient(180deg,#2563eb,#0ea5e9)}
+/* ===== 1080P 宽屏布局 ===== */
+.wrap{max-width:1560px;margin:0 auto;padding:24px 32px 70px}
+.head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+.head h1{font-size:20px;font-weight:700;letter-spacing:1px;display:flex;align-items:center;gap:10px}
+.head h1::before{content:'';width:4px;height:19px;border-radius:2px;background:linear-gradient(180deg,#2563eb,#0ea5e9)}
 .head .back{font-size:13px;color:#7dd3fc;background:rgba(37,99,235,.12);border:1px solid rgba(96,165,250,.3);padding:6px 14px;border-radius:8px}
 .head .back:hover{background:rgba(37,99,235,.22)}
-.card{background:#1e293b;border:1px solid #334155;border-radius:14px;padding:22px;margin-bottom:16px}
-.hint{font-size:12.5px;color:#94a3b8;line-height:1.7}
+.card{background:#1e293b;border:1px solid #334155;border-radius:14px;padding:20px 22px;margin-bottom:14px}
+.hint{font-size:13px;color:#94a3b8;line-height:1.8}
 .hint b{color:#7dd3fc;font-weight:600}
 /* 登录 */
-.login-box{max-width:400px;margin:40px auto}
+.login-box{max-width:420px;margin:60px auto}
 .login-box .field{margin-bottom:14px}
 label{display:block;font-size:13px;color:#94a3b8;margin-bottom:6px}
 input[type=password],input[type=text]{
@@ -30,47 +31,56 @@ input[type=password],input[type=text]{
 input:focus{border-color:#3b82f6}
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:6px;
-  padding:10px 22px;border-radius:9px;font-size:14px;font-weight:600;
+  padding:10px 24px;border-radius:9px;font-size:14px;font-weight:600;
   cursor:pointer;border:1px solid transparent;transition:all .2s;font-family:inherit}
 .btn-primary{background:linear-gradient(135deg,#2563eb,#0ea5e9);color:#fff;box-shadow:0 6px 18px rgba(37,99,235,.4)}
 .btn-primary:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(37,99,235,.5)}
 .btn-primary:disabled{opacity:.55;cursor:not-allowed;transform:none}
 .btn-ghost{background:#334155;color:#cbd5e1}
 .btn-ghost:hover{background:#475569;color:#e2e8f0}
-.btn-line{background:transparent;color:#94a3b8;border:1px solid #475569;padding:6px 12px;font-size:12.5px;border-radius:7px}
+.btn-line{background:transparent;color:#94a3b8;border:1px solid #475569;padding:6px 12px;font-size:12.5px;border-radius:7px;cursor:pointer}
 .btn-line:hover{color:#e2e8f0;border-color:#64748b}
 .btn-danger{color:#f87171;border-color:rgba(248,113,113,.4)}
 .btn-danger:hover{background:rgba(248,113,113,.12)}
 .w100{width:100%}
 .err{color:#f87171;font-size:13px;margin-top:10px;display:none}
-/* 动态条目编辑 */
-.item{background:#0f172a;border:1px solid #334155;border-radius:12px;padding:16px;margin-bottom:14px}
-.item-top{display:flex;gap:10px;margin-bottom:10px;flex-wrap:wrap}
-.item-top .f-date{width:110px;flex-shrink:0}
-.item-top .f-title{flex:1;min-width:200px}
-.item-ops{display:flex;gap:6px;flex-shrink:0;align-items:flex-start}
+/* ===== 1080P 三列动态卡片 ===== */
+.items-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.item{background:#0f172a;border:1px solid #334155;border-radius:12px;padding:16px;margin-bottom:0;display:flex;flex-direction:column}
+.item-index{font-size:11px;color:#64748b;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+.item-ops{display:flex;gap:6px}
+.item-top{display:flex;gap:10px;margin-bottom:10px}
+.item-top .f-date{width:96px;flex-shrink:0}
+.item-top .f-title{flex:1;min-width:0}
 textarea{
   width:100%;background:#0f172a;border:1px solid #334155;border-radius:9px;
-  padding:10px 14px;font-size:13.5px;color:#e2e8f0;outline:none;transition:border .2s;
-  font-family:inherit;resize:vertical;min-height:64px;line-height:1.6}
+  padding:9px 13px;font-size:13px;color:#e2e8f0;outline:none;transition:border .2s;
+  font-family:inherit;resize:vertical;min-height:72px;line-height:1.6;flex:1}
 textarea:focus{border-color:#3b82f6}
-.item-index{font-size:11px;color:#64748b;margin-bottom:8px}
-/* 动态照片 */
-.img-zone{margin-top:12px;display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start}
-.img-preview img{max-width:280px;max-height:170px;border-radius:9px;border:1px solid #334155;display:block;object-fit:cover;box-shadow:0 4px 14px rgba(0,0,0,.3)}
-.img-none{font-size:12px;color:#64748b;border:1px dashed #334155;border-radius:9px;padding:9px 14px;text-align:center}
-.img-actions{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
-.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
-.status-bar{display:none;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.35);border-radius:10px;padding:12px 16px;font-size:13px;color:#86efac;margin-bottom:16px;line-height:1.7}
+/* 多图区 */
+.img-zone{margin-top:12px}
+.img-add{display:flex;gap:8px;flex-wrap:wrap}
+.img-thumbs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.thumb{position:relative;width:104px;height:78px;border-radius:9px;overflow:hidden;border:1px solid #475569;flex-shrink:0}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.thumb .t-del{position:absolute;top:3px;right:3px;width:20px;height:20px;border-radius:50%;background:rgba(15,23,42,.85);color:#f87171;border:none;font-size:12px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.thumb .t-del:hover{background:rgba(220,38,38,.85);color:#fff}
+.thumb .t-num{position:absolute;bottom:0;left:0;right:0;background:rgba(15,23,42,.75);color:#cbd5e1;font-size:10px;text-align:center;line-height:1.5}
+.img-none{font-size:12px;color:#64748b;border:1px dashed #334155;border-radius:9px;padding:10px 14px;text-align:center;margin-bottom:10px}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.status-bar{display:none;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.35);border-radius:10px;padding:12px 16px;font-size:13px;color:#86efac;margin-bottom:14px;line-height:1.7}
 .status-bar.err{background:rgba(248,113,113,.1);border-color:rgba(248,113,113,.35);color:#fca5a5}
 .status-bar.show{display:block}
 .spin{display:inline-block;width:13px;height:13px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite;vertical-align:-2px;margin-right:6px}
 @keyframes sp{to{transform:rotate(360deg)}}
-.logout{font-size:12px;color:#64748b;margin-left:auto}
+.logout{font-size:12px;color:#64748b;margin-left:auto;cursor:pointer}
 .logout:hover{color:#f87171}
+@media(max-width:1400px){.items-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){.items-grid{grid-template-columns:1fr}}
 @media(max-width:520px){
+.wrap{padding:16px 14px 50px}
+.item-top{flex-wrap:wrap}
 .item-top .f-date{width:100%}
-.item-ops{width:100%;justify-content:flex-end}
 }
 </style>
 </head>
@@ -80,7 +90,7 @@ textarea:focus{border-color:#3b82f6}
   <div class="head">
     <h1>最新动态管理</h1>
     <div style="display:flex;gap:10px;align-items:center">
-      <span class="logout" id="logoutBtn" style="display:none;cursor:pointer">退出登录</span>
+      <span class="logout" id="logoutBtn" style="display:none">退出登录</span>
       <a class="back" href="index.html">← 返回主页</a>
     </div>
   </div>
@@ -107,13 +117,13 @@ textarea:focus{border-color:#3b82f6}
     <div class="status-bar" id="statusBar"></div>
 
     <div class="card">
-      <p class="hint"><b>使用说明</b>：日期填写 <b>10-29</b> 这样的小格式（或"常设"），标题一行，内容为动态详情。<b>可添加照片</b>（点击"添加照片"选择图片，保存时自动上传，单张建议不超过几 MB，系统会自动压缩）。保存后约 1～2 分钟 GitHub Pages 构建完成，主页即显示最新动态。拖动不需要的条目可删除，建议保持 4～6 条。</p>
+      <p class="hint"><b>使用说明</b>：日期填写 <b>10-30</b> 这样的小格式（或"常设"），标题一行，内容为动态详情。<b>每条动态可上传多张照片</b>（点击"添加照片"可一次选多张，已选照片显示缩略图，右上×可删除，拖动暂不支持排序，按选择顺序展示）。保存时照片自动压缩上传。保存后约 1～2 分钟 GitHub Pages 构建完成，主页即显示缩略图。</p>
     </div>
 
-    <div id="itemList"></div>
+    <div class="items-grid" id="itemList"></div>
 
     <div class="toolbar">
-      <button class="btn btn-ghost" onclick="addItem(null,'','')">＋ 添加一条动态</button>
+      <button class="btn btn-ghost" onclick="addItem()">＋ 添加一条动态</button>
       <button class="btn btn-primary" id="saveBtn" onclick="save()"><span id="saveBtnText">保存并发布</span></button>
     </div>
   </div>
@@ -128,8 +138,7 @@ const _TK = ['ghp_SHsQ','rDU9BybyX','cHGzKSJHF','u2Skjaa','K0cGSLE'].join('');
 const API = 'https://api.github.com/repos/yydxgjzx/yydxgcjszx/contents/news.json';
 const GH_HEADERS = () => ({ 'Authorization': 'token ' + _TK, 'Accept': 'application/vnd.github+json' });
 
-let items = [];       // {date,title,desc}
-let lastSha = null;   // news.json 当前 sha
+let items = [];       // {date,title,desc,images:[url...],_new:[file...]}
 
 /* ===== 登录 ===== */
 (function init(){
@@ -166,45 +175,61 @@ async function load(){
     const j = await r.json();
     lastSha = j.sha;
     const data = JSON.parse(decodeURIComponent(escape(atob(j.content.replace(/\n/g,'')))));
-    items = (data.items||[]).map(x => ({date:x.date||'', title:x.title||'', desc:x.desc||'', imageUrl:x.imageUrl||''}));
-    if (!items.length) items = [{date:'', title:'', desc:''}];
+    items = (data.items||[]).map(x => {
+      const imgs = x.images && x.images.length ? x.images : (x.imageUrl ? [x.imageUrl] : []);
+      return {date:x.date||'', title:x.title||'', desc:x.desc||'', images:imgs, _new:[]};
+    });
+    if (!items.length) items = [emptyItem()];
     render();
   } catch(e) {
     status('动态数据加载失败：' + e.message + '，请刷新重试', true);
   }
 }
+let lastSha = null;
+function emptyItem(){ return {date:'', title:'', desc:'', images:[], _new:[]}; }
 
-/* ===== 渲染编辑器 ===== */
+/* ===== 渲染编辑器（三列卡片 + 多图缩略图） ===== */
 function render(){
   const box = document.getElementById('itemList');
   box.innerHTML = items.map((it,i) => {
-    const preview = it._preview || it.imageUrl || '';
+    const newCount = (it._new||[]).length;
+    const existCount = (it.images||[]).length;
+    let thumbs = '';
+    (it.images||[]).forEach((url,k) => {
+      thumbs += '<div class="thumb"><img src="' + url + '"><button class="t-del" title="删除" onclick="delImg(' + i + ',' + k + ')">×</button><div class="t-num">' + (k+1) + '</div></div>';
+    });
+    (it._new||[]).forEach((f,k) => {
+      thumbs += '<div class="thumb"><img src="' + f.preview + '"><button class="t-del" title="删除" onclick="delNew(' + i + ',' + k + ')">×</button><div class="t-num">新' + (k+1) + '</div></div>';
+    });
+    const hasImg = existCount + newCount > 0;
     return '<div class="item">'
-    + '<div class="item-index">第 ' + (i+1) + ' 条</div>'
-    + '<div class="item-top">'
-    + '<div class="f-date"><label>日期</label><input type="text" value="' + esc(it.date) + '" placeholder="如 10-29 / 常设" oninput="items['+i+'].date=this.value"></div>'
-    + '<div class="f-title"><label>标题</label><input type="text" value="' + esc(it.title) + '" placeholder="动态标题" oninput="items['+i+'].title=this.value"></div>'
+    + '<div class="item-index"><span>第 ' + (i+1) + ' 条</span>'
     + '<div class="item-ops">'
     + '<button class="btn-line" onclick="mv(' + i + ',-1)" title="上移">↑</button>'
     + '<button class="btn-line" onclick="mv(' + i + ',1)" title="下移">↓</button>'
     + '<button class="btn-line btn-danger" onclick="del(' + i + ')">删除</button>'
     + '</div></div>'
+    + '<div class="item-top">'
+    + '<div class="f-date"><label>日期</label><input type="text" value="' + esc(it.date) + '" placeholder="如 10-30 / 常设" oninput="items['+i+'].date=this.value"></div>'
+    + '<div class="f-title"><label>标题</label><input type="text" value="' + esc(it.title) + '" placeholder="动态标题" oninput="items['+i+'].title=this.value"></div>'
+    + '</div>'
     + '<label>内容</label>'
     + '<textarea placeholder="动态详情说明" oninput="items['+i+'].desc=this.value">' + esc(it.desc) + '</textarea>'
     + '<div class="img-zone">'
-    + (preview ? '<div class="img-preview"><img src="' + preview + '"></div>' : '<div class="img-none">暂无照片</div>')
-    + '<div class="img-actions">'
-    + '<button class="btn-line" onclick="document.getElementById(\'imgFile_'+i+'\').click()">📷 ' + (preview ? '更换照片' : '添加照片') + '</button>'
-    + '<input type="file" id="imgFile_'+i+'" accept="image/*" style="display:none" onchange="pickImg('+i+',this)">'
-    + (preview ? '<button class="btn-line btn-danger" onclick="removeImg('+i+')">移除照片</button>' : '')
+    + (hasImg ? '<div class="img-thumbs">' + thumbs + '</div>' : '<div class="img-none">暂无照片</div>')
+    + '<div class="img-add">'
+    + '<button class="btn-line" onclick="document.getElementById(\'imgFile_'+i+'\').click()">📷 添加照片' + (hasImg ? '' : '') + '</button>'
+    + '<input type="file" id="imgFile_'+i+'" accept="image/*" multiple style="display:none" onchange="pickImg('+i+',this)">'
     + '</div></div>'
     + '</div>';
   }).join('');
 }
 function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-function addItem(date,title,desc){ items.push({date: date||'', title: title||'', desc: title!==''?desc:'', imageUrl:''}); render(); const last=box=>box.lastElementChild; last(document.getElementById('itemList')).scrollIntoView({behavior:'smooth',block:'center'}); }
-function del(i){ if (!confirm('确定删除第 ' + (i+1) + ' 条动态？')) return; items.splice(i,1); render(); }
+function addItem(){ items.push(emptyItem()); render(); document.getElementById('itemList').lastElementChild.scrollIntoView({behavior:'smooth',block:'center'}); }
+function del(i){ if (!confirm('确定删除第 ' + (i+1) + ' 条动态（含其照片引用）？')) return; items.splice(i,1); render(); }
 function mv(i,d){ const j = i + d; if (j < 0 || j >= items.length) return; const t = items[i]; items[i] = items[j]; items[j] = t; render(); }
+function delImg(i,k){ items[i].images.splice(k,1); render(); }
+function delNew(i,k){ items[i]._new.splice(k,1); render(); }
 
 function status(msg, isErr){
   const bar = document.getElementById('statusBar');
@@ -212,67 +237,23 @@ function status(msg, isErr){
   bar.innerHTML = msg;
 }
 
-/* ===== 保存并发布 ===== */
-async function save(){
-  const valid = items.filter(x => (x.title||'').trim() !== '');
-  for (const v of valid) { v.date = v.date.trim(); v.title = v.title.trim(); v.desc = v.desc.trim(); }
-  if (!valid.length) { status('至少保留一条有标题的动态再保存。', true); return; }
-
-  const btn = document.getElementById('saveBtn');
-  const btnText = document.getElementById('saveBtnText');
-  btn.disabled = true; btnText.innerHTML = '<span class="spin"></span>发布中…';
-
-  try {
-    /* 先上传新添加的照片 */
-    for (const v of valid) {
-      if (v._file) {
-        btnText.innerHTML = '<span class="spin"></span>上传照片中…';
-        const dataUrl = await compressImage(v._file);
-        v.imageUrl = await uploadImage(dataUrl);
-        delete v._file; delete v._preview;
-      }
-    }
-    /* 重新获取最新 sha，避免覆盖他人修改 */
-    const g = await fetch(API, { headers: GH_HEADERS() });
-    if (g.ok) { const j = await g.json(); lastSha = j.sha; }
-
-    const now = new Date();
-    const pad = n => String(n).padStart(2,'0');
-    const updated = now.getFullYear() + '-' + pad(now.getMonth()+1) + '-' + pad(now.getDate()) + ' ' + pad(now.getHours()) + ':' + pad(now.getMinutes());
-    const payload = { updatedAt: updated, items: valid };
-    const content = btoa(unescape(encodeURIComponent(JSON.stringify(payload, null, 1))));
-
-    const r = await fetch(API, {
-      method: 'PUT',
-      headers: Object.assign(GH_HEADERS(), {'Content-Type':'application/json'}),
-      body: JSON.stringify({ message: '管理员更新最新动态 ' + updated, content: content, sha: lastSha || undefined, branch: 'main' })
-    });
-    if (!r.ok) { const t = await r.text(); throw new Error('HTTP ' + r.status + ' ' + t.substring(0,120)); }
-    const j = await r.json();
-    lastSha = j.content.sha;
-
-    items = valid;
-    render();
-    status('✅ 发布成功！更新时间：<b>' + updated + '</b><br>GitHub Pages 构建约需 1～2 分钟，稍后 <a href="index.html" style="color:#7dd3fc">刷新主页</a> 即可看到最新动态。');
-    document.getElementById('newsUpdated_hint')?.remove();
-  } catch(e) {
-    status('发布失败：' + e.message + '<br>请稍后重试；若持续失败请联系技术支撑。', true);
-  } finally {
-    btn.disabled = false; btnText.textContent = '保存并发布';
-  }
-}
-
-/* ===== 照片处理：选择 / 压缩 / 上传 / 移除 ===== */
+/* ===== 照片：多选/压缩/上传 ===== */
 function pickImg(i, input){
-  const file = input && input.files && input.files[0];
-  if (!file) return;
-  if (!/^image\//.test(file.type)) { status('请选择图片文件（jpg/png 等）', true); input.value=''; return; }
-  const reader = new FileReader();
-  reader.onload = e => { items[i]._preview = e.target.result; items[i]._file = file; input.value=''; render(); };
-  reader.onerror = () => { status('图片读取失败，请重试', true); };
-  reader.readAsDataURL(file);
+  const files = input && input.files ? Array.from(input.files) : [];
+  if (!files.length) return;
+  for (const f of files) {
+    if (!/^image\//.test(f.type)) continue;
+    items[i]._new.push({file: f, preview: null, name: f.name});
+  }
+  input.value = '';
+  /* 生成预览 */
+  const pending = items[i]._new.filter(x => !x.preview);
+  pending.forEach(p => {
+    const reader = new FileReader();
+    reader.onload = e => { p.preview = e.target.result; render(); };
+    reader.readAsDataURL(p.file);
+  });
 }
-function removeImg(i){ delete items[i]._file; delete items[i]._preview; delete items[i].imageUrl; render(); }
 function compressImage(file){
   return new Promise((resolve,reject)=>{
     const reader = new FileReader();
@@ -286,10 +267,10 @@ function compressImage(file){
         canvas.getContext('2d').drawImage(img, 0, 0, w, h);
         resolve(canvas.toDataURL('image/jpeg', 0.8));
       };
-      img.onerror = reject;
+      img.onerror = () => reject(new Error('图片解析失败'));
       img.src = e.target.result;
     };
-    reader.onerror = reject;
+    reader.onerror = () => reject(new Error('图片读取失败'));
     reader.readAsDataURL(file);
   });
 }
@@ -304,6 +285,60 @@ async function uploadImage(dataUrl){
   });
   if (!r.ok){ const t = await r.text(); throw new Error('照片上传失败 HTTP ' + r.status + ' ' + t.substring(0,100)); }
   return 'https://yydxgjzx.github.io/yydxgcjszx/images/' + name;
+}
+
+/* ===== 保存并发布 ===== */
+async function save(){
+  const valid = items.filter(x => (x.title||'').trim() !== '');
+  for (const v of valid) { v.date = v.date.trim(); v.title = v.title.trim(); v.desc = v.desc.trim(); }
+  if (!valid.length) { status('至少保留一条有标题的动态再保存。', true); return; }
+
+  const btn = document.getElementById('saveBtn');
+  const btnText = document.getElementById('saveBtnText');
+  btn.disabled = true;
+
+  try {
+    let total = 0, done = 0;
+    for (const v of valid) total += (v._new||[]).length;
+    for (const v of valid) {
+      for (let k = 0; k < (v._new||[]).length; k++) {
+        done++;
+        btnText.innerHTML = '<span class="spin"></span>上传照片 ' + done + '/' + total + '…';
+        const dataUrl = await compressImage(v._new[k].file);
+        const url = await uploadImage(dataUrl);
+        v.images.push(url);
+      }
+      v._new = [];
+    }
+
+    btnText.innerHTML = '<span class="spin"></span>发布中…';
+    /* 重新获取最新 sha，避免覆盖他人修改 */
+    const g = await fetch(API, { headers: GH_HEADERS() });
+    if (g.ok) { const j = await g.json(); lastSha = j.sha; }
+
+    const now = new Date();
+    const pad = n => String(n).padStart(2,'0');
+    const updated = now.getFullYear() + '-' + pad(now.getMonth()+1) + '-' + pad(now.getDate()) + ' ' + pad(now.getHours()) + ':' + pad(now.getMinutes());
+    const payload = { updatedAt: updated, items: valid.map(v => ({date:v.date, title:v.title, desc:v.desc, images:v.images})) };
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(payload, null, 1))));
+
+    const r = await fetch(API, {
+      method: 'PUT',
+      headers: Object.assign(GH_HEADERS(), {'Content-Type':'application/json'}),
+      body: JSON.stringify({ message: '管理员更新最新动态 ' + updated, content: content, sha: lastSha || undefined, branch: 'main' })
+    });
+    if (!r.ok) { const t = await r.text(); throw new Error('HTTP ' + r.status + ' ' + t.substring(0,120)); }
+    const j = await r.json();
+    lastSha = j.content.sha;
+
+    items = valid.map(v => ({date:v.date, title:v.title, desc:v.desc, images:v.images, _new:[]}));
+    render();
+    status('✅ 发布成功！更新时间：<b>' + updated + '</b><br>GitHub Pages 构建约需 1～2 分钟，稍后 <a href="index.html" style="color:#7dd3fc">刷新主页</a> 即可看到最新动态与照片缩略图。');
+  } catch(e) {
+    status('发布失败：' + e.message + '<br>请稍后重试；若持续失败请联系技术支撑。', true);
+  } finally {
+    btn.disabled = false; btnText.textContent = '保存并发布';
+  }
 }
 </script>
 

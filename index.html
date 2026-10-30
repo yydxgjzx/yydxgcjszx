@@ -102,14 +102,31 @@ a{text-decoration:none;color:inherit}
 .news-head h3{font-size:14.5px;font-weight:700;color:#f1f5f9;display:flex;align-items:center;gap:8px}
 .news-head h3::before{content:'';width:4px;height:14px;border-radius:2px;background:linear-gradient(180deg,#2563eb,#0ea5e9)}
 .news-updated{font-size:11.5px;color:#64748b}
-.news-flow{display:grid;grid-template-columns:repeat(2,1fr);gap:0 26px}
-.news-item{display:flex;gap:11px;padding:9px 0;border-bottom:1px dashed #334155}
+.news-flow{display:grid;grid-template-columns:repeat(2,1fr);gap:0 32px}
+.news-item{display:flex;gap:11px;padding:10px 0;border-bottom:1px dashed #334155}
 .news-item:nth-last-child(-n+2){border-bottom:none}
 .news-date{flex-shrink:0;min-width:46px;height:21px;border-radius:6px;background:rgba(37,99,235,.16);border:1px solid rgba(96,165,250,.3);color:#7dd3fc;font-size:10.5px;font-weight:600;display:flex;align-items:center;justify-content:center;margin-top:2px;padding:0 5px}
 .news-body{flex:1;min-width:0}
 .news-title{font-size:13px;font-weight:600;color:#e2e8f0;line-height:1.4}
 .news-desc{font-size:12px;color:#94a3b8;margin-top:1px;line-height:1.5}
+/* 缩略图 */
+.news-thumbs{display:flex;flex-wrap:wrap;gap:8px;margin-top:9px}
+.news-thumb{width:86px;height:64px;border-radius:8px;overflow:hidden;border:1px solid #334155;cursor:zoom-in;flex-shrink:0;transition:all .2s;position:relative}
+.news-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.news-thumb:hover{border-color:#60a5fa;transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.3)}
+.news-thumb .n-badge{position:absolute;bottom:0;left:0;right:0;background:rgba(15,23,42,.78);color:#e2e8f0;font-size:9.5px;text-align:center;line-height:1.5}
 .news-img{display:block;max-width:100%;max-height:240px;width:auto;border-radius:9px;border:1px solid #334155;margin-top:8px;object-fit:cover;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+/* 灯箱 */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:9999;backdrop-filter:blur(6px);align-items:center;justify-content:center;flex-direction:column;padding:24px}
+.lightbox.show{display:flex}
+.lightbox img{max-width:92vw;max-height:82vh;border-radius:10px;box-shadow:0 10px 40px rgba(0,0,0,.6);object-fit:contain}
+.lb-close{position:absolute;top:16px;right:22px;font-size:34px;color:#e2e8f0;cursor:pointer;line-height:1;background:rgba(30,41,59,.7);border:none;border-radius:50%;width:44px;height:44px}
+.lb-close:hover{color:#7dd3fc}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);font-size:30px;color:#e2e8f0;cursor:pointer;background:rgba(30,41,59,.7);border:none;border-radius:50%;width:46px;height:46px;line-height:1}
+.lb-nav:hover{color:#7dd3fc}
+.lb-prev{left:18px}
+.lb-next{right:18px}
+.lb-count{color:#cbd5e1;font-size:13px;margin-top:12px;letter-spacing:2px}
 .news-empty{color:#64748b;font-size:13px;text-align:center;padding:24px 0;grid-column:1/-1}
 .loading{color:#64748b;font-size:13px;text-align:center;padding:20px 0}
 /* ===== 页脚 ===== */
@@ -239,6 +256,15 @@ a{text-decoration:none;color:inherit}
 
 </div>
 
+<!-- 图片灯箱 -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" id="lbClose" aria-label="关闭">×</button>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="上一张">‹</button>
+  <img id="lbImg" alt="动态照片">
+  <button class="lb-nav lb-next" id="lbNext" aria-label="下一张">›</button>
+  <div class="lb-count" id="lbCount"></div>
+</div>
+
 <div class="footer">
   <b>岳阳电信云网工程建设中心</b><br>
   <span style="opacity:.7">© 2026 中国电信股份有限公司岳阳分公司 云网工程建设中心</span>
@@ -294,17 +320,60 @@ fetch('news.json?t=' + Date.now())
       document.getElementById('newsList').innerHTML = '<div class="news-empty">暂无动态</div>';
       return;
     }
-    document.getElementById('newsList').innerHTML = list.map(it =>
-      '<div class="news-item"><span class="news-date">' + (it.date||'') + '</span>'
+    document.getElementById('newsList').innerHTML = list.map((it,idx) => {
+      const imgs = (it.images && it.images.length) ? it.images : (it.imageUrl ? [it.imageUrl] : []);
+      const thumbs = imgs.length
+        ? '<div class="news-thumbs">' + imgs.map((u,k) =>
+            '<div class="news-thumb" onclick="openLB(' + idx + ',' + k + ')" title="点击放大"><img src="' + u + '" loading="lazy" alt="照片' + (k+1) + '"><span class="n-badge">' + (k+1) + '/' + imgs.length + '</span></div>'
+          ).join('') + '</div>'
+        : '';
+      return '<div class="news-item"><span class="news-date">' + (it.date||'') + '</span>'
       + '<div class="news-body"><div class="news-title">' + (it.title||'') + '</div>'
       + (it.desc ? '<div class="news-desc">' + it.desc + '</div>' : '')
-      + (it.imageUrl ? '<img class="news-img" src="' + it.imageUrl + '" alt="' + (it.title||'') + '" loading="lazy">' : '')
-      + '</div></div>'
-    ).join('');
+      + thumbs
+      + '</div></div>';
+    }).join('');
+    window._newsImgs = list.map(it => (it.images && it.images.length) ? it.images : (it.imageUrl ? [it.imageUrl] : []));
   })
   .catch(() => {
     document.getElementById('newsList').innerHTML = '<div class="news-empty">动态加载失败，请刷新重试</div>';
   });
+
+/* ===== 图片灯箱 ===== */
+let lbIdx = 0, lbK = 0;
+function openLB(idx, k){
+  lbIdx = idx; lbK = k;
+  showLB();
+  document.getElementById('lightbox').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function showLB(){
+  const arr = (window._newsImgs && window._newsImgs[lbIdx]) || [];
+  if (!arr.length) return;
+  document.getElementById('lbImg').src = arr[lbK];
+  document.getElementById('lbCount').textContent = (lbK+1) + ' / ' + arr.length;
+}
+function lbStep(n){
+  const arr = (window._newsImgs && window._newsImgs[lbIdx]) || [];
+  if (!arr.length) return;
+  lbK = (lbK + n + arr.length) % arr.length;
+  showLB();
+}
+function closeLB(){
+  document.getElementById('lightbox').classList.remove('show');
+  document.body.style.overflow = '';
+}
+document.getElementById('lbClose').onclick = closeLB;
+document.getElementById('lbPrev').onclick = () => lbStep(-1);
+document.getElementById('lbNext').onclick = () => lbStep(1);
+document.getElementById('lightbox').addEventListener('click', e => { if (e.target === e.currentTarget) closeLB(); });
+document.addEventListener('keydown', e => {
+  const lb = document.getElementById('lightbox');
+  if (!lb.classList.contains('show')) return;
+  if (e.key === 'Escape') closeLB();
+  if (e.key === 'ArrowLeft') lbStep(-1);
+  if (e.key === 'ArrowRight') lbStep(1);
+});
 
 /* ===== 导航高亮 ===== */
 const links = document.querySelectorAll('#navLinks a');

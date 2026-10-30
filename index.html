@@ -109,6 +109,7 @@ a{text-decoration:none;color:inherit}
 .news-body{flex:1;min-width:0}
 .news-title{font-size:13px;font-weight:600;color:#e2e8f0;line-height:1.4}
 .news-desc{font-size:12px;color:#94a3b8;margin-top:1px;line-height:1.5}
+.news-img{display:block;max-width:100%;max-height:240px;width:auto;border-radius:9px;border:1px solid #334155;margin-top:8px;object-fit:cover;box-shadow:0 4px 14px rgba(0,0,0,.25)}
 .news-empty{color:#64748b;font-size:13px;text-align:center;padding:24px 0;grid-column:1/-1}
 .loading{color:#64748b;font-size:13px;text-align:center;padding:20px 0}
 /* ===== 页脚 ===== */
@@ -297,6 +298,7 @@ fetch('news.json?t=' + Date.now())
       '<div class="news-item"><span class="news-date">' + (it.date||'') + '</span>'
       + '<div class="news-body"><div class="news-title">' + (it.title||'') + '</div>'
       + (it.desc ? '<div class="news-desc">' + it.desc + '</div>' : '')
+      + (it.imageUrl ? '<img class="news-img" src="' + it.imageUrl + '" alt="' + (it.title||'') + '" loading="lazy">' : '')
       + '</div></div>'
     ).join('');
   })

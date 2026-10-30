@@ -55,6 +55,11 @@ textarea{
   font-family:inherit;resize:vertical;min-height:64px;line-height:1.6}
 textarea:focus{border-color:#3b82f6}
 .item-index{font-size:11px;color:#64748b;margin-bottom:8px}
+/* 动态照片 */
+.img-zone{margin-top:12px;display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start}
+.img-preview img{max-width:280px;max-height:170px;border-radius:9px;border:1px solid #334155;display:block;object-fit:cover;box-shadow:0 4px 14px rgba(0,0,0,.3)}
+.img-none{font-size:12px;color:#64748b;border:1px dashed #334155;border-radius:9px;padding:9px 14px;text-align:center}
+.img-actions{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
 .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
 .status-bar{display:none;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.35);border-radius:10px;padding:12px 16px;font-size:13px;color:#86efac;margin-bottom:16px;line-height:1.7}
 .status-bar.err{background:rgba(248,113,113,.1);border-color:rgba(248,113,113,.35);color:#fca5a5}
@@ -102,7 +107,7 @@ textarea:focus{border-color:#3b82f6}
     <div class="status-bar" id="statusBar"></div>
 
     <div class="card">
-      <p class="hint"><b>使用说明</b>：日期填写 <b>10-29</b> 这样的小格式（或"常设"），标题一行，内容为动态详情。保存后约 1～2 分钟 GitHub Pages 构建完成，主页即显示最新动态。拖动不需要的条目可删除，建议保持 4～6 条。</p>
+      <p class="hint"><b>使用说明</b>：日期填写 <b>10-29</b> 这样的小格式（或"常设"），标题一行，内容为动态详情。<b>可添加照片</b>（点击"添加照片"选择图片，保存时自动上传，单张建议不超过几 MB，系统会自动压缩）。保存后约 1～2 分钟 GitHub Pages 构建完成，主页即显示最新动态。拖动不需要的条目可删除，建议保持 4～6 条。</p>
     </div>
 
     <div id="itemList"></div>
@@ -161,7 +166,7 @@ async function load(){
     const j = await r.json();
     lastSha = j.sha;
     const data = JSON.parse(decodeURIComponent(escape(atob(j.content.replace(/\n/g,'')))));
-    items = (data.items||[]).map(x => ({date:x.date||'', title:x.title||'', desc:x.desc||''}));
+    items = (data.items||[]).map(x => ({date:x.date||'', title:x.title||'', desc:x.desc||'', imageUrl:x.imageUrl||''}));
     if (!items.length) items = [{date:'', title:'', desc:''}];
     render();
   } catch(e) {
@@ -172,8 +177,9 @@ async function load(){
 /* ===== 渲染编辑器 ===== */
 function render(){
   const box = document.getElementById('itemList');
-  box.innerHTML = items.map((it,i) =>
-    '<div class="item">'
+  box.innerHTML = items.map((it,i) => {
+    const preview = it._preview || it.imageUrl || '';
+    return '<div class="item">'
     + '<div class="item-index">第 ' + (i+1) + ' 条</div>'
     + '<div class="item-top">'
     + '<div class="f-date"><label>日期</label><input type="text" value="' + esc(it.date) + '" placeholder="如 10-29 / 常设" oninput="items['+i+'].date=this.value"></div>'
@@ -185,11 +191,18 @@ function render(){
     + '</div></div>'
     + '<label>内容</label>'
     + '<textarea placeholder="动态详情说明" oninput="items['+i+'].desc=this.value">' + esc(it.desc) + '</textarea>'
-    + '</div>'
-  ).join('');
+    + '<div class="img-zone">'
+    + (preview ? '<div class="img-preview"><img src="' + preview + '"></div>' : '<div class="img-none">暂无照片</div>')
+    + '<div class="img-actions">'
+    + '<button class="btn-line" onclick="document.getElementById(\'imgFile_'+i+'\').click()">📷 ' + (preview ? '更换照片' : '添加照片') + '</button>'
+    + '<input type="file" id="imgFile_'+i+'" accept="image/*" style="display:none" onchange="pickImg('+i+',this)">'
+    + (preview ? '<button class="btn-line btn-danger" onclick="removeImg('+i+')">移除照片</button>' : '')
+    + '</div></div>'
+    + '</div>';
+  }).join('');
 }
 function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-function addItem(date,title,desc){ items.push({date: date||'', title: title||'', desc: title!==''?desc:''}); render(); const last=box=>box.lastElementChild; last(document.getElementById('itemList')).scrollIntoView({behavior:'smooth',block:'center'}); }
+function addItem(date,title,desc){ items.push({date: date||'', title: title||'', desc: title!==''?desc:'', imageUrl:''}); render(); const last=box=>box.lastElementChild; last(document.getElementById('itemList')).scrollIntoView({behavior:'smooth',block:'center'}); }
 function del(i){ if (!confirm('确定删除第 ' + (i+1) + ' 条动态？')) return; items.splice(i,1); render(); }
 function mv(i,d){ const j = i + d; if (j < 0 || j >= items.length) return; const t = items[i]; items[i] = items[j]; items[j] = t; render(); }
 
@@ -210,6 +223,15 @@ async function save(){
   btn.disabled = true; btnText.innerHTML = '<span class="spin"></span>发布中…';
 
   try {
+    /* 先上传新添加的照片 */
+    for (const v of valid) {
+      if (v._file) {
+        btnText.innerHTML = '<span class="spin"></span>上传照片中…';
+        const dataUrl = await compressImage(v._file);
+        v.imageUrl = await uploadImage(dataUrl);
+        delete v._file; delete v._preview;
+      }
+    }
     /* 重新获取最新 sha，避免覆盖他人修改 */
     const g = await fetch(API, { headers: GH_HEADERS() });
     if (g.ok) { const j = await g.json(); lastSha = j.sha; }
@@ -238,6 +260,50 @@ async function save(){
   } finally {
     btn.disabled = false; btnText.textContent = '保存并发布';
   }
+}
+
+/* ===== 照片处理：选择 / 压缩 / 上传 / 移除 ===== */
+function pickImg(i, input){
+  const file = input && input.files && input.files[0];
+  if (!file) return;
+  if (!/^image\//.test(file.type)) { status('请选择图片文件（jpg/png 等）', true); input.value=''; return; }
+  const reader = new FileReader();
+  reader.onload = e => { items[i]._preview = e.target.result; items[i]._file = file; input.value=''; render(); };
+  reader.onerror = () => { status('图片读取失败，请重试', true); };
+  reader.readAsDataURL(file);
+}
+function removeImg(i){ delete items[i]._file; delete items[i]._preview; delete items[i].imageUrl; render(); }
+function compressImage(file){
+  return new Promise((resolve,reject)=>{
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = new Image();
+      img.onload = () => {
+        const MAX = 1200; let w = img.width, h = img.height;
+        if (w > MAX){ h = Math.round(h*MAX/w); w = MAX; }
+        const canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        resolve(canvas.toDataURL('image/jpeg', 0.8));
+      };
+      img.onerror = reject;
+      img.src = e.target.result;
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+async function uploadImage(dataUrl){
+  const base64 = dataUrl.split(',')[1];
+  const name = 'img-' + Date.now() + '-' + Math.random().toString(36).slice(2,8) + '.jpg';
+  const path = 'images/' + name;
+  const r = await fetch('https://api.github.com/repos/yydxgjzx/yydxgcjszx/contents/' + path, {
+    method: 'PUT',
+    headers: Object.assign(GH_HEADERS(), {'Content-Type':'application/json'}),
+    body: JSON.stringify({ message: '上传动态照片 ' + name, content: base64, branch: 'main' })
+  });
+  if (!r.ok){ const t = await r.text(); throw new Error('照片上传失败 HTTP ' + r.status + ' ' + t.substring(0,100)); }
+  return 'https://yydxgjzx.github.io/yydxgcjszx/images/' + name;
 }
 </script>
 

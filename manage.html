@@ -117,7 +117,7 @@ textarea:focus{border-color:#3b82f6}
     <div class="status-bar" id="statusBar"></div>
 
     <div class="card">
-      <p class="hint"><b>使用说明</b>：日期填写 <b>10-30</b> 这样的小格式（或"常设"），标题一行，内容为动态详情。<b>每条动态可上传多张照片</b>（点击"添加照片"可一次选多张，已选照片显示缩略图，右上×可删除，拖动暂不支持排序，按选择顺序展示）。保存时照片自动压缩上传。保存后约 1～2 分钟 GitHub Pages 构建完成，主页即显示缩略图。</p>
+      <p class="hint"><b>使用说明</b>：日期填写 <b>11-02</b> 这样的小格式（或"常设"），标题一行，内容为动态详情。<b>主页按日期倒序自动排列，最新的动态显示在最上</b>。每条动态可上传多张照片（点击"添加照片"可一次选多张，已选照片显示缩略图，右上×可删除，按选择顺序展示）。保存时照片自动压缩上传。保存后约 1～2 分钟 GitHub Pages 构建完成，主页即显示缩略图。</p>
     </div>
 
     <div class="items-grid" id="itemList"></div>
@@ -225,7 +225,7 @@ function render(){
   }).join('');
 }
 function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-function addItem(){ items.push(emptyItem()); render(); document.getElementById('itemList').lastElementChild.scrollIntoView({behavior:'smooth',block:'center'}); }
+function addItem(){ items.unshift(emptyItem()); render(); document.getElementById('itemList').firstElementChild.scrollIntoView({behavior:'smooth',block:'center'}); }
 function del(i){ if (!confirm('确定删除第 ' + (i+1) + ' 条动态（含其照片引用）？')) return; items.splice(i,1); render(); }
 function mv(i,d){ const j = i + d; if (j < 0 || j >= items.length) return; const t = items[i]; items[i] = items[j]; items[j] = t; render(); }
 function delImg(i,k){ items[i].images.splice(k,1); render(); }

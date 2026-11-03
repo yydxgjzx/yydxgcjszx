@@ -128,6 +128,10 @@ a{text-decoration:none;color:inherit}
 .lb-next{right:18px}
 .lb-count{color:#cbd5e1;font-size:13px;margin-top:12px;letter-spacing:2px}
 .news-empty{color:#64748b;font-size:13px;text-align:center;padding:24px 0;grid-column:1/-1}
+.news-more{display:none;justify-content:center;margin-top:6px;padding-top:12px;border-top:1px dashed #334155}
+.news-more a{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#7dd3fc;background:rgba(37,99,235,.12);border:1px solid rgba(96,165,250,.3);padding:7px 20px;border-radius:9px;transition:all .2s}
+.news-more a:hover{background:rgba(37,99,235,.22);color:#38bdf8;transform:translateY(-1px)}
+.news-more b{color:#38bdf8;font-weight:700}
 .loading{color:#64748b;font-size:13px;text-align:center;padding:20px 0}
 /* ===== 页脚 ===== */
 .footer{text-align:center;color:#64748b;font-size:12px;padding:22px 20px;border-top:1px solid #1e293b;margin-top:6px}
@@ -251,6 +255,9 @@ a{text-decoration:none;color:inherit}
         <span class="news-updated" id="newsUpdated"></span>
       </div>
       <div class="news-flow" id="newsList"><div class="loading">动态加载中…</div></div>
+      <div class="news-more" id="newsMore" style="display:none">
+        <a href="allnews.html">查看更多动态（共 <b id="newsTotal">0</b> 条）→</a>
+      </div>
     </div>
   </div>
 
@@ -324,11 +331,13 @@ fetch('news.json?t=' + Date.now())
   .then(r => r.json())
   .then(d => {
     document.getElementById('newsUpdated').textContent = d.updatedAt ? '更新于 ' + d.updatedAt : '';
-    const list = (d.items || []).slice().sort((a,b) => dateKey(b.date) - dateKey(a.date));
-    if (!list.length) {
+    const sorted = (d.items || []).slice().sort((a,b) => dateKey(b.date) - dateKey(a.date));
+    if (!sorted.length) {
       document.getElementById('newsList').innerHTML = '<div class="news-empty">暂无动态</div>';
       return;
     }
+    /* 游客查看：主页仅展示最新 6 条，其余在"更多动态"页浏览 */
+    const list = sorted.slice(0, 6);
     document.getElementById('newsList').innerHTML = list.map((it,idx) => {
       const imgs = (it.images && it.images.length) ? it.images : (it.imageUrl ? [it.imageUrl] : []);
       const thumbs = imgs.length
@@ -343,6 +352,14 @@ fetch('news.json?t=' + Date.now())
       + '</div></div>';
     }).join('');
     window._newsImgs = list.map(it => (it.images && it.images.length) ? it.images : (it.imageUrl ? [it.imageUrl] : []));
+    /* 超过 6 条时显示"更多动态"入口 */
+    const moreBox = document.getElementById('newsMore');
+    if (sorted.length > 6) {
+      document.getElementById('newsTotal').textContent = sorted.length;
+      moreBox.style.display = 'flex';
+    } else {
+      moreBox.style.display = 'none';
+    }
   })
   .catch(() => {
     document.getElementById('newsList').innerHTML = '<div class="news-empty">动态加载失败，请刷新重试</div>';

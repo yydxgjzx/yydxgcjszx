@@ -311,11 +311,20 @@ fetch('progress.json?t=' + Date.now())
   });
 
 /* ===== 加载最新动态 ===== */
+/* 日期倒序：最新发布的动态排在最上；"常设"等非日期条目排最后 */
+function dateKey(s){
+  const str = String(s||'');
+  const m = str.match(/(\d{1,2})\s*[^\d\s]+\s*(\d{1,2})/);
+  if (m) return parseInt(m[1],10) * 100 + parseInt(m[2],10);
+  const m1 = str.match(/^(\d{1,2})$/);
+  if (m1) return parseInt(m1[1],10) * 100;
+  return -1;
+}
 fetch('news.json?t=' + Date.now())
   .then(r => r.json())
   .then(d => {
     document.getElementById('newsUpdated').textContent = d.updatedAt ? '更新于 ' + d.updatedAt : '';
-    const list = d.items || [];
+    const list = (d.items || []).slice().sort((a,b) => dateKey(b.date) - dateKey(a.date));
     if (!list.length) {
       document.getElementById('newsList').innerHTML = '<div class="news-empty">暂无动态</div>';
       return;

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0f172a">
+<meta name="description" content="岳阳电信云网工程建设中心 全部最新动态">
+<title>全部动态 - 岳阳电信云网工程建设中心</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232563eb'/%3E%3Ctext x='32' y='44' font-size='34' font-weight='bold' text-anchor='middle' fill='white' font-family='sans-serif'%3E云%3C/text%3E%3C/svg%3E">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh;-webkit-font-smoothing:antialiased;line-height:1.6}
+a{text-decoration:none;color:inherit}
+/* 顶部导航 */
+.navbar{position:sticky;top:0;z-index:100;background:rgba(15,23,42,.93);backdrop-filter:blur(10px);border-bottom:1px solid #1e293b;box-shadow:0 2px 16px rgba(0,0,0,.35)}
+.nav-inner{max-width:1400px;margin:0 auto;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.brand{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.brand-logo{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#2563eb,#0ea5e9);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:800;color:#fff;box-shadow:0 4px 14px rgba(37,99,235,.45)}
+.brand-text{display:flex;flex-direction:column;line-height:1.25}
+.brand-cn{font-size:10.5px;color:#94a3b8;letter-spacing:1px}
+.brand-name{font-size:15px;font-weight:700;color:#f1f5f9;letter-spacing:.5px}
+.back{font-size:13px;color:#7dd3fc;background:rgba(37,99,235,.12);border:1px solid rgba(96,165,250,.3);padding:6px 14px;border-radius:8px;white-space:nowrap}
+.back:hover{background:rgba(37,99,235,.22)}
+/* 页头 */
+.pagehead{background:linear-gradient(135deg,#1e3a8a 0%,#155e75 55%,#0f172a 100%);padding:28px 24px 24px;text-align:center;position:relative;overflow:hidden}
+.pagehead::before{content:'';position:absolute;top:-90px;right:-90px;width:250px;height:250px;border-radius:50%;background:radial-gradient(circle,rgba(96,165,250,.16),transparent 70%)}
+.pagehead h1{font-size:24px;font-weight:800;letter-spacing:3px;color:#f8fafc;position:relative;z-index:1}
+.pagehead .sub{font-size:12.5px;color:#94a3b8;margin-top:4px;position:relative;z-index:1}
+/* 列表 */
+.container{max-width:1400px;margin:0 auto;padding:0 24px}
+.news-card{background:#1e293b;border:1px solid #334155;border-radius:14px;padding:18px 22px;margin:22px 0 30px}
+.news-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;gap:10px;flex-wrap:wrap}
+.news-head h3{font-size:15px;font-weight:700;color:#f1f5f9;display:flex;align-items:center;gap:8px}
+.news-head h3::before{content:'';width:4px;height:15px;border-radius:2px;background:linear-gradient(180deg,#2563eb,#0ea5e9)}
+.news-updated{font-size:11.5px;color:#64748b}
+.news-flow{display:grid;grid-template-columns:repeat(2,1fr);gap:0 32px}
+.news-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px dashed #334155}
+.news-item:nth-last-child(-n+2){border-bottom:none}
+.news-date{flex-shrink:0;min-width:48px;height:22px;border-radius:6px;background:rgba(37,99,235,.16);border:1px solid rgba(96,165,250,.3);color:#7dd3fc;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;margin-top:2px;padding:0 6px}
+.news-body{flex:1;min-width:0}
+.news-title{font-size:13.5px;font-weight:600;color:#e2e8f0;line-height:1.4}
+.news-desc{font-size:12.5px;color:#94a3b8;margin-top:2px;line-height:1.55}
+.news-thumbs{display:flex;flex-wrap:wrap;gap:8px;margin-top:9px}
+.news-thumb{width:86px;height:64px;border-radius:8px;overflow:hidden;border:1px solid #334155;cursor:zoom-in;flex-shrink:0;transition:all .2s;position:relative}
+.news-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.news-thumb:hover{border-color:#60a5fa;transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.3)}
+.news-thumb .n-badge{position:absolute;bottom:0;left:0;right:0;background:rgba(15,23,42,.78);color:#e2e8f0;font-size:9.5px;text-align:center;line-height:1.5}
+.news-empty{color:#64748b;font-size:13px;text-align:center;padding:24px 0;grid-column:1/-1}
+.loading{color:#64748b;font-size:13px;text-align:center;padding:24px 0}
+/* 灯箱 */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:9999;backdrop-filter:blur(6px);align-items:center;justify-content:center;flex-direction:column;padding:24px}
+.lightbox.show{display:flex}
+.lightbox img{max-width:92vw;max-height:82vh;border-radius:10px;box-shadow:0 10px 40px rgba(0,0,0,.6);object-fit:contain}
+.lb-close{position:absolute;top:16px;right:22px;font-size:34px;color:#e2e8f0;cursor:pointer;line-height:1;background:rgba(30,41,59,.7);border:none;border-radius:50%;width:44px;height:44px}
+.lb-close:hover{color:#7dd3fc}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);font-size:30px;color:#e2e8f0;cursor:pointer;background:rgba(30,41,59,.7);border:none;border-radius:50%;width:46px;height:46px;line-height:1}
+.lb-nav:hover{color:#7dd3fc}
+.lb-prev{left:18px}
+.lb-next{right:18px}
+.lb-count{color:#cbd5e1;font-size:13px;margin-top:12px;letter-spacing:2px}
+/* 页脚 */
+.footer{text-align:center;color:#64748b;font-size:12px;padding:22px 20px;border-top:1px solid #1e293b;margin-top:6px}
+.footer b{color:#94a3b8;font-weight:600}
+.footer a{color:#475569;font-size:11px}
+.footer a:hover{color:#64748b}
+@media(max-width:1200px){
+.news-flow{grid-template-columns:1fr}
+.news-item:nth-last-child(-n+2){border-bottom:1px dashed #334155}
+.news-item:last-child{border-bottom:none}
+}
+@media(max-width:768px){
+.nav-inner{height:50px}
+.brand-cn{display:none}
+.brand-name{font-size:14px}
+}
+@media(max-width:520px){
+.pagehead h1{font-size:20px;letter-spacing:2px}
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">
+      <div class="brand-logo">云</div>
+      <div class="brand-text">
+        <span class="brand-cn">中国电信 · 岳阳分公司</span>
+        <span class="brand-name">云网工程建设中心</span>
+      </div>
+    </a>
+    <a class="back" href="index.html">← 返回主页</a>
+  </div>
+</header>
+
+<div class="pagehead">
+  <h1>全部动态</h1>
+  <p class="sub">云网工程建设中心 工作动态</p>
+</div>
+
+<div class="container">
+  <div class="news-card">
+    <div class="news-head">
+      <h3>工程建设中心最新动态</h3>
+      <span class="news-updated" id="newsUpdated"></span>
+    </div>
+    <div class="news-flow" id="newsList"><div class="loading">动态加载中…</div></div>
+  </div>
+</div>
+
+<div class="footer">
+  <b>岳阳电信云网工程建设中心</b><br>
+  <span style="opacity:.7">© 2026 中国电信股份有限公司岳阳分公司 云网工程建设中心</span>
+  <br><a href="manage.html">动态管理</a>
+</div>
+
+<!-- 图片灯箱 -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" id="lbClose" aria-label="关闭">×</button>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="上一张">‹</button>
+  <img id="lbImg" alt="动态照片">
+  <button class="lb-nav lb-next" id="lbNext" aria-label="下一张">›</button>
+  <div class="lb-count" id="lbCount"></div>
+</div>
+
+<script>
+/* 日期倒序：最新发布的动态排在最上；"常设"等非日期条目排最后 */
+function dateKey(s){
+  const str = String(s||'');
+  const m = str.match(/(\d{1,2})\s*[^\d\s]+\s*(\d{1,2})/);
+  if (m) return parseInt(m[1],10) * 100 + parseInt(m[2],10);
+  const m1 = str.match(/^(\d{1,2})$/);
+  if (m1) return parseInt(m1[1],10) * 100;
+  return -1;
+}
+
+fetch('news.json?t=' + Date.now())
+  .then(r => r.json())
+  .then(d => {
+    document.getElementById('newsUpdated').textContent = d.updatedAt ? '更新于 ' + d.updatedAt : '';
+    const list = (d.items || []).slice().sort((a,b) => dateKey(b.date) - dateKey(a.date));
+    if (!list.length) {
+      document.getElementById('newsList').innerHTML = '<div class="news-empty">暂无动态</div>';
+      return;
+    }
+    document.getElementById('newsList').innerHTML = list.map((it,idx) => {
+      const imgs = (it.images && it.images.length) ? it.images : (it.imageUrl ? [it.imageUrl] : []);
+      const thumbs = imgs.length
+        ? '<div class="news-thumbs">' + imgs.map((u,k) =>
+            '<div class="news-thumb" onclick="openLB(' + idx + ',' + k + ')" title="点击放大"><img src="' + u + '" loading="lazy" alt="照片' + (k+1) + '"><span class="n-badge">' + (k+1) + '/' + imgs.length + '</span></div>'
+          ).join('') + '</div>'
+        : '';
+      return '<div class="news-item"><span class="news-date">' + (it.date||'') + '</span>'
+      + '<div class="news-body"><div class="news-title">' + (it.title||'') + '</div>'
+      + (it.desc ? '<div class="news-desc">' + it.desc + '</div>' : '')
+      + thumbs
+      + '</div></div>';
+    }).join('');
+    window._newsImgs = list.map(it => (it.images && it.images.length) ? it.images : (it.imageUrl ? [it.imageUrl] : []));
+  })
+  .catch(() => {
+    document.getElementById('newsList').innerHTML = '<div class="news-empty">动态加载失败，请刷新重试</div>';
+  });
+
+/* 图片灯箱 */
+let lbIdx = 0, lbK = 0;
+function openLB(idx, k){
+  lbIdx = idx; lbK = k;
+  showLB();
+  document.getElementById('lightbox').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function showLB(){
+  const arr = (window._newsImgs && window._newsImgs[lbIdx]) || [];
+  if (!arr.length) return;
+  document.getElementById('lbImg').src = arr[lbK];
+  document.getElementById('lbCount').textContent = (lbK+1) + ' / ' + arr.length;
+}
+function lbStep(n){
+  const arr = (window._newsImgs && window._newsImgs[lbIdx]) || [];
+  if (!arr.length) return;
+  lbK = (lbK + n + arr.length) % arr.length;
+  showLB();
+}
+function closeLB(){
+  document.getElementById('lightbox').classList.remove('show');
+  document.body.style.overflow = '';
+}
+document.getElementById('lbClose').onclick = closeLB;
+document.getElementById('lbPrev').onclick = () => lbStep(-1);
+document.getElementById('lbNext').onclick = () => lbStep(1);
+document.getElementById('lightbox').addEventListener('click', e => { if (e.target === e.currentTarget) closeLB(); });
+document.addEventListener('keydown', e => {
+  const lb = document.getElementById('lightbox');
+  if (!lb.classList.contains('show')) return;
+  if (e.key === 'Escape') closeLB();
+  if (e.key === 'ArrowLeft') lbStep(-1);
+  if (e.key === 'ArrowRight') lbStep(1);
+});
+</script>
+
+</body>
+</html>

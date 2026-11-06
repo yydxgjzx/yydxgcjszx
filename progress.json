@@ -1,27 +1,35 @@
 {
- "asOf": "2026-11-01",
+ "asOf": "2026-11-06",
  "kpi": {
-  "total": 894,
-  "accept": 665,
+  "total": 895,
+  "accept": 672,
   "close": 598,
-  "zhuangu": 11706.4
+  "zhuangu": 12030.9
  },
  "center": {
   "name": "中心整体",
-  "total": 894,
-  "accept": 665,
+  "total": 895,
+  "accept": 672,
   "close": 598,
-  "rate": 0.7438,
-  "closeRate": 0.6689
+  "rate": 0.7508,
+  "closeRate": 0.6682
  },
  "admins": [
   {
    "name": "孙志祥",
    "total": 162,
-   "accept": 135,
+   "accept": 136,
    "close": 120,
-   "rate": 0.8333,
+   "rate": 0.8395,
    "closeRate": 0.7407
+  },
+  {
+   "name": "蒋志昭",
+   "total": 146,
+   "accept": 117,
+   "close": 105,
+   "rate": 0.8014,
+   "closeRate": 0.7192
   },
   {
    "name": "丰中山",
@@ -30,14 +38,6 @@
    "close": 81,
    "rate": 0.7838,
    "closeRate": 0.7297
-  },
-  {
-   "name": "蒋志昭",
-   "total": 146,
-   "accept": 112,
-   "close": 105,
-   "rate": 0.7671,
-   "closeRate": 0.7192
   },
   {
    "name": "曹毅",
@@ -49,11 +49,11 @@
   },
   {
    "name": "李力",
-   "total": 92,
-   "accept": 65,
+   "total": 91,
+   "accept": 66,
    "close": 56,
-   "rate": 0.7065,
-   "closeRate": 0.6087
+   "rate": 0.7253,
+   "closeRate": 0.6154
   },
   {
    "name": "刘益锴",
@@ -65,22 +65,22 @@
   },
   {
    "name": "陈凌",
-   "total": 100,
+   "total": 102,
    "accept": 63,
    "close": 60,
-   "rate": 0.63,
-   "closeRate": 0.6
+   "rate": 0.6176,
+   "closeRate": 0.5882
   }
  ],
  "gz": {
-  "totalAmount": 10032.3,
-  "totalRate": 0.7382,
-  "monthAmount": 0.0
+  "totalAmount": 10048.8,
+  "totalRate": 0.7373,
+  "monthAmount": 16.7
  },
  "zg": {
-  "zhuanguAmount": 18782.7,
-  "zhuanguDone": 11706.4,
-  "zhuanguRate": 0.6233,
-  "monthAmount": 0.0
+  "zhuanguAmount": 18811.3,
+  "zhuanguDone": 12030.9,
+  "zhuanguRate": 0.6396,
+  "monthAmount": 324.4
  }
 }

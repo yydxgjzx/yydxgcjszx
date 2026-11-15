@@ -174,6 +174,7 @@ a{text-decoration:none;color:inherit}
     <div class="nav-right">
       <nav class="nav-links" id="navLinks">
         <a href="#sanxiao">效率 · 效果 · 效益</a>
+        <a href="#party">党建工作</a>
         <a href="#news">最新动态</a>
       </nav>
       <a class="sys-btn sub" href="https://yydxgjzx.github.io/up/" target="_blank">阻力系统</a>
@@ -244,6 +245,19 @@ a{text-decoration:none;color:inherit}
 
   </div>
   <p class="note">详细进度数据请访问工程验收进度看板查看 · 数据每日 9:00 自动更新</p>
+
+  <!-- 党建工作 -->
+  <div class="section" id="party">
+    <h2 class="section-title">党建<span>工作</span></h2>
+    <p class="section-desc">党建引领 · 凝聚发展合力，由管理员发布更新</p>
+    <div class="news-card">
+      <div class="news-head">
+        <h3>党建工作动态</h3>
+        <span class="news-updated" id="partyUpdated"></span>
+      </div>
+      <div class="news-flow" id="partyList"><div class="loading">党建动态加载中…</div></div>
+    </div>
+  </div>
 
   <!-- 最新动态 -->
   <div class="section" id="news">
@@ -327,31 +341,30 @@ function dateKey(s){
   if (m1) return parseInt(m1[1],10) * 100;
   return -1;
 }
+/* 渲染通用：支持业务/党建双源 */
+function renderNewsList(containerId, sorted, imgStore, fnName){
+  const list = sorted.slice(0, 6);
+  document.getElementById(containerId).innerHTML = list.map((it,idx) => {
+    const imgs = (it.images && it.images.length) ? it.images : (it.imageUrl ? [it.imageUrl] : []);
+    const thumbs = imgs.length
+      ? '<div class="news-thumbs">' + imgs.map((u,k) =>
+          '<div class="news-thumb" onclick="' + fnName + '(' + idx + ',' + k + ')" title="点击放大"><img src="' + u + '" loading="lazy" alt="照片' + (k+1) + '"><span class="n-badge">' + (k+1) + '/' + imgs.length + '</span></div>'
+        ).join('') + '</div>'
+      : '';
+    return '<div class="news-item"><span class="news-date">' + (it.date||'') + '</span>'
+    + '<div class="news-body"><div class="news-title">' + (it.title||'') + '</div>'
+    + (it.desc ? '<div class="news-desc">' + it.desc + '</div>' : '')
+    + thumbs
+    + '</div></div>';
+  }).join('') || '<div class="news-empty">暂无动态</div>';
+  window[imgStore] = list.map(it => (it.images && it.images.length) ? it.images : (it.imageUrl ? [it.imageUrl] : []));
+}
 fetch('news.json?t=' + Date.now())
   .then(r => r.json())
   .then(d => {
     document.getElementById('newsUpdated').textContent = d.updatedAt ? '更新于 ' + d.updatedAt : '';
     const sorted = (d.items || []).slice().sort((a,b) => dateKey(b.date) - dateKey(a.date));
-    if (!sorted.length) {
-      document.getElementById('newsList').innerHTML = '<div class="news-empty">暂无动态</div>';
-      return;
-    }
-    /* 游客查看：主页仅展示最新 6 条，其余在"更多动态"页浏览 */
-    const list = sorted.slice(0, 6);
-    document.getElementById('newsList').innerHTML = list.map((it,idx) => {
-      const imgs = (it.images && it.images.length) ? it.images : (it.imageUrl ? [it.imageUrl] : []);
-      const thumbs = imgs.length
-        ? '<div class="news-thumbs">' + imgs.map((u,k) =>
-            '<div class="news-thumb" onclick="openLB(' + idx + ',' + k + ')" title="点击放大"><img src="' + u + '" loading="lazy" alt="照片' + (k+1) + '"><span class="n-badge">' + (k+1) + '/' + imgs.length + '</span></div>'
-          ).join('') + '</div>'
-        : '';
-      return '<div class="news-item"><span class="news-date">' + (it.date||'') + '</span>'
-      + '<div class="news-body"><div class="news-title">' + (it.title||'') + '</div>'
-      + (it.desc ? '<div class="news-desc">' + it.desc + '</div>' : '')
-      + thumbs
-      + '</div></div>';
-    }).join('');
-    window._newsImgs = list.map(it => (it.images && it.images.length) ? it.images : (it.imageUrl ? [it.imageUrl] : []));
+    renderNewsList('newsList', sorted, '_newsImgs', 'openLB');
     /* 超过 6 条时显示"更多动态"入口 */
     const moreBox = document.getElementById('newsMore');
     if (sorted.length > 6) {
@@ -365,25 +378,31 @@ fetch('news.json?t=' + Date.now())
     document.getElementById('newsList').innerHTML = '<div class="news-empty">动态加载失败，请刷新重试</div>';
   });
 
-/* ===== 图片灯箱 ===== */
-let lbIdx = 0, lbK = 0;
-function openLB(idx, k){
-  lbIdx = idx; lbK = k;
-  showLB();
-  document.getElementById('lightbox').classList.add('show');
-  document.body.style.overflow = 'hidden';
-}
-function showLB(){
-  const arr = (window._newsImgs && window._newsImgs[lbIdx]) || [];
-  if (!arr.length) return;
-  document.getElementById('lbImg').src = arr[lbK];
-  document.getElementById('lbCount').textContent = (lbK+1) + ' / ' + arr.length;
+/* ===== 加载党建工作动态 ===== */
+fetch('party.json?t=' + Date.now())
+  .then(r => r.json())
+  .then(d => {
+    document.getElementById('partyUpdated').textContent = d.updatedAt ? '更新于 ' + d.updatedAt : '';
+    const sorted = (d.items || []).slice().sort((a,b) => dateKey(b.date) - dateKey(a.date));
+    renderNewsList('partyList', sorted, '_partyImgs', 'openLBP');
+  })
+  .catch(() => {
+    document.getElementById('partyList').innerHTML = '<div class="news-empty">党建动态加载失败，请刷新重试</div>';
+  });
+
+/* ===== 图片灯箱（通用，支持业务/党建双源） ===== */
+let lbArr = [], lbK = 0;
+function openLB(idx, k){ lbArr = (window._newsImgs && window._newsImgs[idx]) || []; lbK = k; showLB2(); document.getElementById('lightbox').classList.add('show'); document.body.style.overflow = 'hidden'; }
+function openLBP(idx, k){ lbArr = (window._partyImgs && window._partyImgs[idx]) || []; lbK = k; showLB2(); document.getElementById('lightbox').classList.add('show'); document.body.style.overflow = 'hidden'; }
+function showLB2(){
+  if (!lbArr.length) return;
+  document.getElementById('lbImg').src = lbArr[lbK];
+  document.getElementById('lbCount').textContent = (lbK+1) + ' / ' + lbArr.length;
 }
 function lbStep(n){
-  const arr = (window._newsImgs && window._newsImgs[lbIdx]) || [];
-  if (!arr.length) return;
-  lbK = (lbK + n + arr.length) % arr.length;
-  showLB();
+  if (!lbArr.length) return;
+  lbK = (lbK + n + lbArr.length) % lbArr.length;
+  showLB2();
 }
 function closeLB(){
   document.getElementById('lightbox').classList.remove('show');

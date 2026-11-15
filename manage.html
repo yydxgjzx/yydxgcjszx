@@ -75,6 +75,12 @@ textarea:focus{border-color:#3b82f6}
 @keyframes sp{to{transform:rotate(360deg)}}
 .logout{font-size:12px;color:#64748b;margin-left:auto;cursor:pointer}
 .logout:hover{color:#f87171}
+/* Tab 切换 */
+.tab-bar{display:flex;gap:10px;margin-bottom:14px}
+.mtab{padding:8px 26px;border-radius:9px;border:1px solid #475569;font-size:14px;font-weight:600;background:#1e293b;color:#94a3b8;cursor:pointer;transition:all .2s}
+.mtab:hover{color:#e2e8f0;border-color:#64748b}
+.mtab.active{background:linear-gradient(135deg,#dc2626,#ef4444);color:#fff;box-shadow:0 4px 16px rgba(220,38,38,.4);border-color:transparent}
+.mtab.news.active{background:linear-gradient(135deg,#2563eb,#0ea5e9);box-shadow:0 4px 16px rgba(37,99,235,.4)}
 @media(max-width:1400px){.items-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:900px){.items-grid{grid-template-columns:1fr}}
 @media(max-width:520px){
@@ -116,8 +122,13 @@ textarea:focus{border-color:#3b82f6}
   <div id="editBox" style="display:none">
     <div class="status-bar" id="statusBar"></div>
 
+    <div class="tab-bar">
+      <button class="mtab news active" id="tabNewsBtn" onclick="switchTab('news')">业务动态</button>
+      <button class="mtab" id="tabPartyBtn" onclick="switchTab('party')">党建动态</button>
+    </div>
+
     <div class="card">
-      <p class="hint"><b>使用说明</b>：日期填写 <b>11-02</b> 这样的小格式（或"常设"），标题一行，内容为动态详情。<b>主页按日期倒序自动排列，最新的动态显示在最上</b>。每条动态可上传多张照片（点击"添加照片"可一次选多张，已选照片显示缩略图，右上×可删除，按选择顺序展示）。保存时照片自动压缩上传。保存后约 1～2 分钟 GitHub Pages 构建完成，主页即显示缩略图。</p>
+      <p class="hint"><b>使用说明</b>：顶部可切换<b>「业务动态 / 党建动态」</b>两个栏目，分别维护、分别发布。日期填写 <b>11-06</b> 这样的小格式（或"常设"），标题一行，内容为动态详情。主页按日期倒序自动排列（最新在上，仅显示最新 6 条），每条可上传多张照片（可一次选多张，自动压缩上传）。保存后约 1～2 分钟 GitHub Pages 构建完成，主页即显示。</p>
     </div>
 
     <div class="items-grid" id="itemList"></div>
@@ -135,8 +146,13 @@ textarea:focus{border-color:#3b82f6}
 const USER = 'yydxgjzx';
 const PASS = 'yydxgjzx8216109';
 const _TK = ['ghp_SHsQ','rDU9BybyX','cHGzKSJHF','u2Skjaa','K0cGSLE'].join('');
-const API = 'https://api.github.com/repos/yydxgjzx/yydxgcjszx/contents/news.json';
+const API_NEWS = 'https://api.github.com/repos/yydxgjzx/yydxgcjszx/contents/news.json';
+const API_PARTY = 'https://api.github.com/repos/yydxgjzx/yydxgcjszx/contents/party.json';
 const GH_HEADERS = () => ({ 'Authorization': 'token ' + _TK, 'Accept': 'application/vnd.github+json' });
+let currentTab = 'news';   // 'news' 业务动态 / 'party' 党建动态
+let itemsLoaded = '';      // 加载时快照，用于切换 Tab 时检查未保存修改
+const api = () => currentTab === 'party' ? API_PARTY : API_NEWS;
+const tabName = () => currentTab === 'party' ? '党建动态' : '最新动态';
 
 let items = [];       // {date,title,desc,images:[url...],_new:[file...]}
 
@@ -167,10 +183,24 @@ document.getElementById('logoutBtn').onclick = ()=>{
   location.reload();
 };
 
+/* ===== Tab 切换（业务/党建） ===== */
+function snapshot(){
+  return JSON.stringify(items.filter(x => (x.title||'').trim() !== '').map(v => ({date:v.date, title:v.title, desc:v.desc, images:v.images})));
+}
+function switchTab(tab){
+  if (tab === currentTab) return;
+  if (snapshot() !== itemsLoaded && !confirm('当前有未保存的修改，切换将丢失，确定切换？')) return;
+  currentTab = tab;
+  document.getElementById('tabNewsBtn').classList.toggle('active', tab === 'news');
+  document.getElementById('tabPartyBtn').classList.toggle('active', tab === 'party');
+  document.getElementById('statusBar').className = 'status-bar';
+  load();
+}
+
 /* ===== 加载现有动态 ===== */
 async function load(){
   try {
-    const r = await fetch(API, { headers: GH_HEADERS() });
+    const r = await fetch(api(), { headers: GH_HEADERS() });
     if (!r.ok) throw new Error('HTTP ' + r.status);
     const j = await r.json();
     lastSha = j.sha;
@@ -180,9 +210,10 @@ async function load(){
       return {date:x.date||'', title:x.title||'', desc:x.desc||'', images:imgs, _new:[]};
     });
     if (!items.length) items = [emptyItem()];
+    itemsLoaded = snapshot();
     render();
   } catch(e) {
-    status('动态数据加载失败：' + e.message + '，请刷新重试', true);
+    status(tabName() + '数据加载失败：' + e.message + '，请刷新重试', true);
   }
 }
 let lastSha = null;
@@ -313,7 +344,7 @@ async function save(){
 
     btnText.innerHTML = '<span class="spin"></span>发布中…';
     /* 重新获取最新 sha，避免覆盖他人修改 */
-    const g = await fetch(API, { headers: GH_HEADERS() });
+    const g = await fetch(api(), { headers: GH_HEADERS() });
     if (g.ok) { const j = await g.json(); lastSha = j.sha; }
 
     const now = new Date();
@@ -322,18 +353,19 @@ async function save(){
     const payload = { updatedAt: updated, items: valid.map(v => ({date:v.date, title:v.title, desc:v.desc, images:v.images})) };
     const content = btoa(unescape(encodeURIComponent(JSON.stringify(payload, null, 1))));
 
-    const r = await fetch(API, {
+    const r = await fetch(api(), {
       method: 'PUT',
       headers: Object.assign(GH_HEADERS(), {'Content-Type':'application/json'}),
-      body: JSON.stringify({ message: '管理员更新最新动态 ' + updated, content: content, sha: lastSha || undefined, branch: 'main' })
+      body: JSON.stringify({ message: '管理员更新' + tabName() + ' ' + updated, content: content, sha: lastSha || undefined, branch: 'main' })
     });
     if (!r.ok) { const t = await r.text(); throw new Error('HTTP ' + r.status + ' ' + t.substring(0,120)); }
     const j = await r.json();
     lastSha = j.content.sha;
 
     items = valid.map(v => ({date:v.date, title:v.title, desc:v.desc, images:v.images, _new:[]}));
+    itemsLoaded = snapshot();
     render();
-    status('✅ 发布成功！更新时间：<b>' + updated + '</b><br>GitHub Pages 构建约需 1～2 分钟，稍后 <a href="index.html" style="color:#7dd3fc">刷新主页</a> 即可看到最新动态与照片缩略图。');
+    status('✅ ' + tabName() + '发布成功！更新时间：<b>' + updated + '</b><br>GitHub Pages 构建约需 1～2 分钟，稍后 <a href="index.html" style="color:#7dd3fc">刷新主页</a> 即可看到最新动态与照片缩略图。');
   } catch(e) {
     status('发布失败：' + e.message + '<br>请稍后重试；若持续失败请联系技术支撑。', true);
   } finally {

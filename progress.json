@@ -1,86 +1,86 @@
 {
- "asOf": "2026-11-15",
+ "asOf": "2026-11-22",
  "kpi": {
-  "total": 898,
-  "accept": 679,
-  "close": 605,
-  "zhuangu": 12103.5
+  "total": 903,
+  "accept": 682,
+  "close": 614,
+  "zhuangu": 12408.6
  },
  "center": {
   "name": "中心整体",
-  "total": 898,
-  "accept": 679,
-  "close": 605,
-  "rate": 0.7561,
-  "closeRate": 0.6737
+  "total": 903,
+  "accept": 682,
+  "close": 614,
+  "rate": 0.7553,
+  "closeRate": 0.68
  },
  "admins": [
   {
    "name": "孙志祥",
-   "total": 163,
-   "accept": 137,
+   "total": 164,
+   "accept": 138,
    "close": 120,
-   "rate": 0.8405,
-   "closeRate": 0.7362
+   "rate": 0.8415,
+   "closeRate": 0.7317
   },
   {
    "name": "蒋志昭",
-   "total": 146,
+   "total": 147,
    "accept": 118,
    "close": 109,
-   "rate": 0.8082,
-   "closeRate": 0.7466
+   "rate": 0.8027,
+   "closeRate": 0.7415
   },
   {
    "name": "丰中山",
-   "total": 111,
-   "accept": 87,
-   "close": 81,
-   "rate": 0.7838,
-   "closeRate": 0.7297
-  },
-  {
-   "name": "曹毅",
-   "total": 118,
+   "total": 112,
    "accept": 89,
-   "close": 76,
-   "rate": 0.7542,
-   "closeRate": 0.6441
+   "close": 81,
+   "rate": 0.7946,
+   "closeRate": 0.7232
   },
   {
    "name": "李力",
    "total": 91,
-   "accept": 68,
-   "close": 57,
-   "rate": 0.7473,
-   "closeRate": 0.6264
+   "accept": 69,
+   "close": 58,
+   "rate": 0.7582,
+   "closeRate": 0.6374
+  },
+  {
+   "name": "曹毅",
+   "total": 119,
+   "accept": 88,
+   "close": 80,
+   "rate": 0.7395,
+   "closeRate": 0.6723
   },
   {
    "name": "刘益锴",
-   "total": 166,
+   "total": 167,
    "accept": 115,
    "close": 101,
-   "rate": 0.6928,
-   "closeRate": 0.6084
+   "rate": 0.6886,
+   "closeRate": 0.6048
   },
   {
    "name": "陈凌",
    "total": 103,
    "accept": 65,
-   "close": 61,
+   "close": 65,
    "rate": 0.6311,
-   "closeRate": 0.5922
+   "closeRate": 0.6311
   }
  ],
  "gz": {
-  "totalAmount": 10174.2,
-  "totalRate": 0.7415,
-  "monthAmount": 142.1
+  "totalAmount": 10462.1,
+  "totalRate": 0.7604,
+  "monthAmount": 430.0
  },
  "zg": {
-  "zhuanguAmount": 18858.6,
-  "zhuanguDone": 12103.5,
-  "zhuanguRate": 0.6418,
-  "monthAmount": 397.1
+  "zhuanguAmount": 18908.9,
+  "zhuanguDone": 12408.6,
+  "zhuanguRate": 0.6562,
+  "monthAmount": 702.1
  }
 }
